@@ -3,7 +3,32 @@ import { Home } from './components/home/home';
 import { C404 } from './components/c404/c404';
 
 export const routes: Routes = [
-    {path:'',pathMatch:'full',redirectTo:'home'},
-    {path:'home',component:Home},
+    {path:'',pathMatch:'full',redirectTo:'login'},
+    {path:'', /*componenteInicial*/ },
+    {path:'/login', /*componenteLogin*/ },
+    {path:'/register', /*componenteUserForm*/ },
+
+
+    {path:'/home', /*componenteHome */ },
+    
+    {path:'/new-product', /*componenteProductForm*/ },
+    {path:'/product/:productID', /*componenteProductView*/ },
+    {path:'/product/edit/:productID', /*componenteProductForm*/ },
+    {path:'/product/checkout/:productID', /*componenteProductCheckout*/ },
+    {path:'/user/:userID', /*componenteUser*/ },
+    {path:'/user/edit-profile/:userID', /*componenteUserForm*/ },
+    {path:'/favorites', /*componenteFavoritos*/ },
+
+
+    {path:'/moderator-panel', /*componenteModerator*/ },
+    {path:'/moderator-panel/incidencia/:incidenciaID', /*componenteIncidenciaView*/ },
+
+
+    {path:'/admin-panel', /*componenteAdminPanel*/ },
+    {path:'/admin-panel/users', /*componenteHome*/ },
+    {path:'/admin-panel/users/:userID', /*componenteHome*/ },
+    {path:'/admin-panel/categorias', /*componenteHome*/ },
+    {path:'/admin-panel/categorias/:categoriaID', /*componenteCategorias*/ },
+    {path:'/admin-panel/estadistics', /*componenteEstadisticas*/ },
     {path:'**',component:C404}
 ];
