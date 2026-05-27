@@ -4,31 +4,40 @@ import { C404 } from './components/c404/c404';
 
 export const routes: Routes = [
     {path:'',pathMatch:'full',redirectTo:'login'},
-    {path:'', /*componenteInicial*/ },
-    {path:'/login', /*componenteLogin*/ },
-    {path:'/register', /*componenteUserForm*/ },
+    {path:'', /*LandingComponent*/ },
+    {path:'login', /*LoginComponent*/ },
+    {path:'register', /*UserFormComponent*/ },
 
+    // Esqueleto
 
-    {path:'/home', /*componenteHome */ },
+    // Rutas Home: Usuario Normal. Falta implemetar el Guard y hacer sus hijos
+
+    {path:'home', /*HomeComponent */ },
     
-    {path:'/new-product', /*componenteProductForm*/ },
-    {path:'/product/:productID', /*componenteProductView*/ },
-    {path:'/product/edit/:productID', /*componenteProductForm*/ },
-    {path:'/product/checkout/:productID', /*componenteProductCheckout*/ },
-    {path:'/user/:userID', /*componenteUser*/ },
-    {path:'/user/edit-profile/:userID', /*componenteUserForm*/ },
-    {path:'/favorites', /*componenteFavoritos*/ },
+    {path:'new-product', /*ProductFormComponent*/ },
+    {path:'product/:productID', /*ProductViewComponent*/ },
+    {path:'product/edit/:productID', /*ProductFormComponent*/ },
+    {path:'product/checkout/:productID', /*ProductCheckoutComponent*/ },
+    {path:'user/:userID', /*UserComponent*/ },
+    {path:'user/edit-profile/:userID', /*UserFormComponent*/ },
+    {path:'favorites', /*FavoritosComponent*/ },
 
+        // Ruta Mensajeria
+        {path:'messages', /*MessagesComponent*/ },
+        {path:'messages/:chatID', /*ChatComponent*/ },
 
-    {path:'/moderator-panel', /*componenteModerator*/ },
-    {path:'/moderator-panel/incidencia/:incidenciaID', /*componenteIncidenciaView*/ },
+    // Rutas Moderator Panel: Usuario Moderador. Falta implemetar el Guard y hacer sus hijos
 
+    {path:'moderator-panel', /*ModeratorPanelComponent*/ },
+    {path:'moderator-panel/incident/:incidentID', /*IncidentViewComponent*/ },
 
-    {path:'/admin-panel', /*componenteAdminPanel*/ },
-    {path:'/admin-panel/users', /*componenteAdminUsers*/ },
-    {path:'/admin-panel/users/:userID', /*componenteAdminUsersView*/ },
-    {path:'/admin-panel/categorias', /*componenteCategorias*/ },
-    {path:'/admin-panel/categorias/:categoriaID', /*componenteCategoriasView*/ },
-    {path:'/admin-panel/estadistics', /*componenteEstadisticas*/ },
+    // Rutas Admin Panel: Usuario Administrador. Falta implemetar el Guard y hacer sus hijos
+
+    {path:'admin-panel', /*AdminPanelComponent*/ },
+    {path:'admin-panel/users', /*AdminUsersComponent*/ },
+    {path:'admin-panel/users/:userID', /*AdminUsersViewComponent*/ },
+    {path:'admin-panel/categories', /*CategoriesComponent*/ },
+    {path:'admin-panel/categories/:categoryID', /*CategoriesViewComponent*/ },
+    {path:'admin-panel/statistics', /*StatisticsComponent*/ },
     {path:'**',component:C404}
 ];
