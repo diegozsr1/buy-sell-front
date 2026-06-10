@@ -44,32 +44,58 @@ export class LoginComponentComponent {
       return;
     }
     console.log(this.miForm.value);
-
-    this.loginService.loginUser(this.miForm.value).subscribe((data) => {
-      if (data.error) {
-        console.log(data);
-        this.mensaje = data.error;
-        this.tipo = true;
-        this.cd.detectChanges();
-        return;
-      } 
+    /*
+        this.loginService.loginUser(this.miForm.value).subscribe((data) => {
+          if (data.error) {
+            console.log(data);
+            this.mensaje = data.error;
+            this.tipo = true;
+            this.cd.detectChanges();
+            return;
+          } 
+            this.user.username = data.usuario.username;
+            this.user.rol = data.usuario.roles_id;
+            localStorage.setItem('usuarioBuy&Sell', JSON.stringify(this.user));
+    
+            if (this.user.rol === 'Administrador') {
+              this.router.navigate(['/admin']);
+            }
+            else if (this.user.rol === 'Moderador') {
+              this.router.navigate(['/moderator']);
+            }
+            else {
+              this.router.navigate(['/home']);
+            }
+    
+          
+        });
+    */
+    this.loginService.loginUser(this.miForm.value).subscribe({
+      next: (data) => {
         this.user.username = data.usuario.username;
         this.user.rol = data.usuario.roles_id;
-        localStorage.setItem('usuarioBuy&Sell', JSON.stringify(this.user));
+
+        localStorage.setItem(
+          'usuarioBuy&Sell',
+          JSON.stringify(this.user)
+        );
 
         if (this.user.rol === 'Administrador') {
           this.router.navigate(['/admin']);
-        }
-        else if (this.user.rol === 'Moderador') {
+        } else if (this.user.rol === 'Moderador') {
           this.router.navigate(['/moderator']);
-        }
-        else {
+        } else {
           this.router.navigate(['/home']);
         }
+      },
 
-      
+      error: (err) => {
+        console.error(err);
+        // Si tu API devuelve { error: "Mensaje" }
+        this.mensaje = 'Email y/o contraseña incorrectos. Inténtelo de nuevo.';
+        this.cd.detectChanges();
+      }
     });
-
 
 
   }
