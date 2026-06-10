@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { LoginRegister } from '../../shared/login-register/login-register';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { UsersService } from '../../services/users-service';
 import { LoginService } from '../../services/login-service';
 
 @Component({
