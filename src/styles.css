@@ -3,7 +3,36 @@
 :root {
   --primary-color: #EFF4FF;
   --secondary-color: #F8F9FF;
+  /*BOTONES*/
+  --secondary-cta: #FE6B00; /*COLOR PRINCIPAL BOTON*/
+  --primary-cta: #003594; /*COLOR SECUNDARIO BOTON*/
+  --primary-deep: #002265; /*COLOR CABECERAS Y  BOTON HOVER */
 
+  /*TEXTOS*/
+  --on-primary-container:#87A4FF; /*TEXTO SOBRE AZUL OSCURO*/
+  --price-link-primary: #003594; /*TEXTO DE LINK O PRECIO*/
+  --text-primary: #0B1C30; /*TEXTO PRINCIPAL*/
+  --text-secondary: #444652; /*TEXTO SECUNDARIO*/
+  --text-outline: #747683; /*PLACEHOLDER, ICONOS*/
+
+  /*FONDOS Y SUPERFICIES*/
+  --surface-page: #F8F9FF; /*FONDO DE PÁGINA*/
+  --surface-card: #FFFFFF; /*FONDO DE TARJETA Y NAVBAR*/
+  --surface-low: #EFF4FF; /*BUSCADOR, PILDORAS*/
+  --surface-container: #E5EEFF; /*CAJAS DE IMG*/
+  --surface-high: #DCE9FF; /*BADGES DE CONDICION*/
+  --outline-bar: #C4C6D4; /*BORDES Y DIVISORES*/
+  --tertiary-container: #004259; /*ACENTO TERCIARIO*/
+  --tertiary-fixed: #C2E8FF;  /*ACENTO CLARO*/
+
+  /*COLORES DE ESTADO*/
+  --success: #1E7B34; /*COLOR DE ÉXITO*/
+  --success-bg: #DDF3E1; /*FONDO DE ÉXITO*/
+  --err: #BA1A1A; /*COLOR DE ERROR*/
+  --err-bg: #FFDAD6; /*FONDO DE ERROR*/
+  --warn: #9A6700; /*COLOR DE ADVERTENCIA*/
+  --warn-bg: #FFF3CD; /*FONDO DE ADVERTENCIA*/
+  
 }
 
 html,
