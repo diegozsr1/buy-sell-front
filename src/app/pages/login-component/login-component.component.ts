@@ -6,18 +6,18 @@ import { LoginService } from '../../services/login-service';
 
 @Component({
   selector: 'app-login-component',
-  imports: [LoginRegister,ReactiveFormsModule,RouterLink],
+  imports: [LoginRegister, ReactiveFormsModule, RouterLink],
   templateUrl: './login-component.component.html',
   styleUrl: './login-component.component.css',
 })
 export class LoginComponentComponent {
-miForm: FormGroup;
+  miForm: FormGroup;
   mensaje: string = '';
   tipo: boolean = false;
   loginService = inject(LoginService);
-  user:any={};
+  user: any = {};
 
-   constructor(private cd: ChangeDetectorRef, private router: Router, private route: ActivatedRoute) {
+  constructor(private cd: ChangeDetectorRef, private router: Router, private route: ActivatedRoute) {
     this.miForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -30,7 +30,7 @@ miForm: FormGroup;
     }, []);
   }
 
-   get email() {
+  get email() {
     return this.miForm.get('email');
   }
 
@@ -38,7 +38,7 @@ miForm: FormGroup;
     return this.miForm.get('password');
   }
 
- loadData() {
+  loadData() {
     if (!this.miForm.valid) {
       this.miForm.markAllAsTouched();
       return;
@@ -47,20 +47,33 @@ miForm: FormGroup;
 
     this.loginService.loginUser(this.miForm.value).subscribe((data) => {
       if (data.error) {
-        this.mensaje = data.error;
-        return;
-      } else {
         console.log(data);
-        if(data.error){
-          this.mensaje=data.error;
+        this.mensaje = data.error;
+        this.tipo = true;
+        this.cd.detectChanges();
+        return;
+      } 
+        this.user.username = data.usuario.username;
+        this.user.rol = data.usuario.roles_id;
+        localStorage.setItem('usuarioBuy&Sell', JSON.stringify(this.user));
+
+        if (this.user.rol === 'Administrador') {
+          this.router.navigate(['/admin']);
         }
-        this.user.username=data.usuario.username;
-        this.user.rol=data.usuario.roles_id;
-        //this.cd.detectChanges();
-      }
+        else if (this.user.rol === 'Moderador') {
+          this.router.navigate(['/moderator']);
+        }
+        else {
+          this.router.navigate(['/home']);
+        }
+
+      
     });
+
+
+
   }
-  
+
 }
 
 
