@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { GuestHeaderComponent } from './guest-header/guest-header.component';
 
 type UserRole = 'guest' | 'user' | 'moderator' | 'admin';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, GuestHeaderComponent],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
-  isLogged = true;
+  isLogged = false;
   role: UserRole = 'guest';
 
   userInitials = 'AA';
