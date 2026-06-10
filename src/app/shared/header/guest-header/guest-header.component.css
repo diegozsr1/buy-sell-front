@@ -1,3 +1,8 @@
+.guest-header {
+    width: 100%;
+    padding: 0.75rem 2rem;
+}
+
 .guest-top {
     gap: 1.5rem;
     width: 100%;

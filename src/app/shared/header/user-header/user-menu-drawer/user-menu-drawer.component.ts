@@ -9,8 +9,8 @@ import { RouterLink } from "@angular/router";
 })
 export class UserMenuDrawerComponent {
 
-  userInitials = 'AA';
-  userName = "Admin Administrator"
+  userInitials = 'UN';
+  userName = "User Name"
   userRating = 4.8
   
   @Output() closeMenu = new EventEmitter<void>();

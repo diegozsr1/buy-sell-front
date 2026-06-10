@@ -10,7 +10,7 @@ import { UserMenuDrawerComponent } from './user-menu-drawer/user-menu-drawer.com
 })
 export class UserHeaderComponent {
 
-  userInitials = 'AA';
+  userInitials = 'UN';
   isMenuOpen = false;
 
   openMenu(): void {

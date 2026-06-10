@@ -13,8 +13,9 @@ type UserRole = 'guest' | 'user' | 'moderator' | 'admin';
   styleUrl: './header.css',
 })
 export class Header {
+
   isLogged = true;
-  role: UserRole = 'user';
+  role: UserRole = 'admin';
 
   get isGuest(): boolean {
     return !this.isLogged || this.role === 'guest';

@@ -20,6 +20,7 @@
 .drawer-header {
     display: flex;
     align-items: center;
+    background-color: aliceblue;
     justify-content: space-between;
     padding: 1rem;
 }
@@ -37,6 +38,7 @@
 .drawer-user {
     display: flex;
     align-items: center;
+    background-color: aliceblue;
     gap: 0.75rem;
     padding: 0 1rem 1rem;
 }
