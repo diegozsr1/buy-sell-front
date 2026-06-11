@@ -1,5 +1,5 @@
 import { Component, computed, EventEmitter, Input, input, Output } from '@angular/core';
-import { ButtonConfigState, ButtonRounded, ButtonVariant } from './button.types';
+import { ButtonConfigState, ButtonIcon, ButtonIconPosition, ButtonRounded, ButtonVariant } from './button.types';
 
 @Component({
   selector: 'app-button',
@@ -12,7 +12,9 @@ export class Button {
   config_type= input<ButtonVariant>('primary');
   config_state = input<ButtonConfigState>('enabled');
   label = input<string>('Button');
-  rounded = input<ButtonRounded>('full');
+  icon = input<ButtonIcon>('none');
+  iconPosition = input<ButtonIconPosition>('left');
+  rounded = input<ButtonRounded>('semi');
   shadow = input<boolean>(false);
 
   //Outputs 
@@ -20,7 +22,7 @@ export class Button {
 
   //Clases computadas
   protected classes = computed(() => 
-    `btn d-inline-flex align-items-center justify-content-center gap-2
+    `btn d-inline-flex align-items-center justify-content-center app-btn
      app-btn--${this.config_type()}
      app-btn--${this.config_state()}
      app-btn--rounded-${this.rounded()}
