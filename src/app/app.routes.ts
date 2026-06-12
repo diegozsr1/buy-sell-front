@@ -28,6 +28,7 @@ import { Reports } from './components/reports/reports';
 import { Historic } from './components/historic/historic';
 import { Ratings } from './components/ratings/ratings';
 import { Settings } from './components/settings/settings';
+import { DetalleUsuario } from './components/detalle-usuario/detalle-usuario';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -79,6 +80,10 @@ export const routes: Routes = [
                     {
                         path: 'users',
                         component: UsuariosRoles
+                    },
+                    {
+                        path: 'user/:id',
+                        component: DetalleUsuario
                     },
                     {
                         path: 'categories',
