@@ -27,25 +27,31 @@
             </div>
         </div>
     </div>
-    <div class="users">
+    @for(usuario of usuarios;track usuario.id){
+        <div class="users">
         <a [routerLink]="['/admin/panel/main']">
             <div class="card">
                 <div class="card-user">
                     <div class="card-body cont">
-                        <div class="iniciales">MG</div>
+                        <div class="iniciales">{{usuario.nombre[0]+usuario.apellidos[0]}}</div>
                         <div class="user">
-                            <h3 class="card-title">Manuel G.</h3>
-                            <p class="card-subtitle mb-2 text-muted">manuel@manuel.es</p>
+                            <h3 class="card-title">{{usuario.nombre}} {{usuario.apellidos[0]}}.</h3>
+                            <p class="card-subtitle mb-2 text-muted">{{usuario.email}}</p>
                         </div>
                     </div>
                     <div class="label">
-                        <div class="label-rol">USUARIO</div>
-                        <div class="label-bloqueado">BLOQUEADO</div>
+                        <div class="label-rol">{{usuario.roles_id.toUpperCase()}}</div>
+                        @if(usuario.bloqueado > 0){
+                            <div class="label-bloqueado">BLOQUEADO</div>
+                        }
+                        
                     </div>
                 </div>
             </div>
         </a>
 
     </div>
+    }
+    
 
 </section>
