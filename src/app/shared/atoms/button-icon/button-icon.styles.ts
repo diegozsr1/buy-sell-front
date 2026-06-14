@@ -1,34 +1,30 @@
 import {  ButtonIconVariant } from  './button-icon.config'
 
-/** Bootstrap Styles */
+/** Bootstrap Styles Configuration */
 
-/** Component Configuration Interface */
-// Describe la forma que tiene la configuración de cada variante.
-// Se crearán las interfaces que necesitemos según e
-// Todas las propiedades son opcionales (?) porque no todas las variantes
-// usan todos los campos: p.ej. un "profile" no tiene `icon` ni `label`,
-// y solo los "check" tienen `bgShadow`.
-//
-// Justificación: tener una interfaz explícita evita "objetos mágicos" sin tipo.
+/** HTML Element State Interfaces */
 interface HtmlIconStates {
-    default?:    string;
+    default?:   string;
     actived?:   string;
     hover?:     string;
     inactived?: string;
 }
 
-// Estructura agrupadora con varios mapas
+/** HTML Dinamic Elements*/
 interface HtmlElements {
   btn:  Object;
   icon: HtmlIconStates;
-  label: string;
+  iconText?: string;
+  label?: string;
 }
 
-
+/** Bootstrap Style Component Configuration*/
 type ButtonVariantMap = Record<ButtonIconVariant, HtmlElements>;
 
-
-const BOOTSTRAP_STYLE_BTN_CIRCLE = "btn d-flex align-items-center justify-content-center rounded-circle border-0";
+const BOOTSTRAP_STYLE_BTN = "btn d-flex flex-column align-items-center justify-content-center"
+const BOOTSTRAP_STYLE_BTN_CIRCLE = BOOTSTRAP_STYLE_BTN + " rounded-circle border-0";
+const BOOTSTRAP_STYLE_BTN_SQUARE = BOOTSTRAP_STYLE_BTN + " rounded-square border-0";
+const BOOTSTRAP_STYLE_BTN_SQUARE_ROUNDED = BOOTSTRAP_STYLE_BTN + " rounded-square rounded-4 border-3";
 
 export const BOOTSTRAP_STYLES: ButtonVariantMap = {
   like: {
@@ -63,7 +59,7 @@ export const BOOTSTRAP_STYLES: ButtonVariantMap = {
   message: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon:{ 
-        default: "bi bi-plus-lg",
+        default: "bi bi-chat-fill",
     },  
     label: "MENSAJES",
   },
@@ -152,5 +148,30 @@ export const BOOTSTRAP_STYLES: ButtonVariantMap = {
         default: "bi bi-arrow-right",
     }, 
     label: "",
+  },
+  'trash-button': {
+    btn:  BOOTSTRAP_STYLE_BTN_SQUARE,
+    icon: { 
+        default: "bi bi-trash3",
+    }, 
+    label: "",
+  },
+  'add-photo': {
+    btn:  BOOTSTRAP_STYLE_BTN_SQUARE_ROUNDED,
+    icon: { 
+        default: "bi bi-arrow-right",
+    }, 
+    label: "",
+  },
+  'add-photo-icon': {
+    btn:  BOOTSTRAP_STYLE_BTN_SQUARE_ROUNDED,
+    icon: { 
+        default: "bi bi-camera",
+    }, 
+    iconText: "SUBIR",
+  },
+  'profile-img': {
+    btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
+    icon: { }, 
   }
 }
