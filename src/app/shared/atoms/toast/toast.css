@@ -1,14 +1,16 @@
+/*------- Container --------*/
 .toast--container {
-  /* estado oculto / reposo */
   background-color: var(--text-primary);
 }
 
+/*------- Message--------*/
 .toast--message {
     padding-left: calc(var(--size)/ 3);
     font-size: var(--size);
     color: var(--surface-page);
 }
 
+/*------- Button Trash --------*/
 #btn--trash {
     font-weight: 500;
     padding-right:var(--size);
@@ -16,6 +18,7 @@
     color: var(--primary-cta);
 }
 
+/*------- Icons --------*/
 .icon--success,
 .icon--info,
 .icon--warn,
@@ -43,7 +46,7 @@
     color: var(--primary-cta);
 }
 
-/** Animations */
+/**--------- Animations ----------*/
 .toast--in {
   animation: toastFadeIn 250ms ease-out;
 }

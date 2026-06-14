@@ -1,7 +1,6 @@
 import { ToastVariant } from  './toast.config'
 
 /** Bootstrap Styles */
-
 /** Component Configuration Interface */
 interface HtmlElements {
   icon:    string;
