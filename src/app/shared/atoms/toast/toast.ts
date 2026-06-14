@@ -10,15 +10,15 @@ import { STYLES} from './toast.styles';
 })
 export class Toast {
   /** Public Inputs */
-  variant = input<ToastVariant>('success');
-  size = input<string>('200px'); 
-  message = input<string>('');
-  trigger = input<boolean>(false);
+  public variant = input<ToastVariant>('success');
+  public size = input<string>('200px'); 
+  public message = input<string>('');
+  public trigger = input<boolean>(false);
 
   /** Public Outputs */
-  undo = output<void>();
+  public undo = output<void>();
 
-  fadeToast = signal<boolean>(false);
+  public fadeToast = signal<boolean>(false);
 
   /** Component State */
   protected readonly ToastState = ToastState;
