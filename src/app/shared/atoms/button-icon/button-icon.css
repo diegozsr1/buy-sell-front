@@ -1,0 +1,113 @@
+/* Variantes específicas con su color */
+/* Los estilos de las variantes se dfefinen con el siguiente formato: {.clase}--{variante}*/
+.btn--like{
+    width:  calc(var(--size)*2);
+    height: calc(var(--size)*2);
+    background-color: var(--surface-page); 
+    color: var(--text-secondary); 
+    box-shadow: 0 9px 12px color-mix(in srgb, var(--text-secondary) 50%, transparent);
+
+    &:hover {
+        color: var(--text-primary); 
+        background-color: var(--surface-container); 
+    }
+}
+
+.btn--home { 
+    background-color: none; 
+    color: var(--text-primary); 
+}
+
+.btn--sell {
+  width:  calc(var(--size)*2);
+  height: calc(var(--size)*2); 
+  background-color: var(--secondary-cta); 
+  box-shadow: 0 5px 25px color-mix(in srgb, var(--primary-cta) 65%, transparent);
+  &.actived {
+    background-color: var(--secondary-cta); 
+  }
+  &.inactived {
+    background-color: var(--secondary-cta); 
+  }
+}
+
+.btn--pencil,
+.btn--trash {
+  border-radius: 0.5rem;
+  background-color: var(--surface-container);
+  color: var(--secondary-cta);
+}
+
+.btn--star {
+  color: var(--secondary-cta);
+}
+
+.btn--profile{
+    width:  calc(var(--size));
+    height: calc(var(--size));
+}
+
+.icon--like {
+  font-size: var(--size);
+  color: var(--text-secondary);
+  &:hover {
+    color: var(--text-primary);
+  }
+  &.actived{ 
+     color: var(--primary-cta);
+  }   
+}
+
+.icon--home,
+.icon--search,
+.icon--profile,
+.icon--message {
+  font-size: var(--size);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: var(--text-primary);
+  }
+  &.actived{ 
+     color: var(--primary-cta);
+  }   
+}
+
+.icon--sell {
+  font-size: var(--size);
+  color: var(--surface-page);
+}
+
+.icon--star {
+  font-size: var(--size);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: rgb(255, 236, 22);
+  }
+  &.actived{ 
+    color: rgb(255, 236, 22);
+  }   
+}
+
+.label--sell {  
+  font-size: calc(var(--size) / 2);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  &.actived{ 
+     color: var(--primary-cta);
+  }
+}
+
+.label--profile {  
+  font-size: calc(var(--size) / 2);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  &.actived{ 
+     color: var(--primary-cta);
+  }
+}
+
+
