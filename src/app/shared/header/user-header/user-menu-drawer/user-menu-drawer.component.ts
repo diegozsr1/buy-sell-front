@@ -17,8 +17,8 @@ export class UserMenuDrawerComponent {
 
   close(): void {
     this.closeMenu.emit();
-    localStorage.removeItem('usuarioBuy&Sell');
-    window.location.href='/login';
+    /*localStorage.removeItem('usuarioBuy&Sell');
+    window.location.href='/login';*/
   }
 
 }
