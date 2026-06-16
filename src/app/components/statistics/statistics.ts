@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Chart } from 'chart.js/auto';
+import { StatisticsService } from '../../services/statistics-service';
 
 @Component({
   selector: 'app-statistics',
@@ -11,6 +12,26 @@ import { Chart } from 'chart.js/auto';
 })
 
 export class Statistics implements AfterViewInit {
+  mensaje: string = '';
+  tipo: boolean = false;
+  estadisticas: any = {};
+  statisticsService = inject(StatisticsService);
+
+  constructor(private cd: ChangeDetectorRef){}
+
+  ngOnInit(){
+    const temporalidad:string='1m';
+    this.statisticsService.getStatisticsByPeriod(temporalidad).subscribe((data) => {
+      if (data.error) {
+        this.mensaje = data.error;
+        return;
+      } else {
+        console.log(data);
+        this.estadisticas = data;
+        this.cd.detectChanges();
+      }
+    });
+  }
 
   ngAfterViewInit() {
     new Chart('salesChart', {
