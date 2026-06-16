@@ -25,4 +25,8 @@ export class CategoriesService {
   insertCategory(body: any): Observable<any> {
     return this.httpClient.post(this.baseUrl, body, {});
   }
+
+  deleteCategory(id: number): Observable<any> {
+    return this.httpClient.delete(this.baseUrl + `${id}`, {});
+  }
 }

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CategoriesService } from '../../services/categories-service';
 import { ICategory } from '../../interfaces/i-category';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categories',
@@ -31,6 +32,28 @@ export class Categories {
   }
 
   borrar(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro de eliminar la categoría?',
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      confirmButtonColor: '#ff0000',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriesService.deleteCategory(id).subscribe((data) => {
+          console.log(data);
 
+          if (data.error) {
+            Swal.fire('Ha habido un error', '', 'info');
+          } else {
+            Swal.fire('Eliminado!', '', 'success');
+            window.location.reload();
+            
+
+          }
+        });
+      }
+    });
   }
 }
