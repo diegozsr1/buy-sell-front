@@ -11,36 +11,55 @@ import { StatisticsService } from '../../services/statistics-service';
   styleUrl: './statistics.css',
 })
 
-export class Statistics implements AfterViewInit {
+export class Statistics {
   mensaje: string = '';
   tipo: boolean = false;
   estadisticas: any = {};
+  ventas:any={};
   statisticsService = inject(StatisticsService);
 
-  constructor(private cd: ChangeDetectorRef){}
+  chart?: Chart;
 
-  ngOnInit(){
-    const temporalidad:string='1m';
-    this.statisticsService.getStatisticsByPeriod(temporalidad).subscribe((data) => {
-      if (data.error) {
-        this.mensaje = data.error;
-        return;
-      } else {
-        console.log(data);
+  constructor(private cd: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    const periodo:string='1m';
+    this.statisticsService.getStatisticsByPeriod(periodo)
+      .subscribe(data => {
+
         this.estadisticas = data;
         this.cd.detectChanges();
-      }
-    });
+
+        setTimeout(() => {
+          this.crearGrafico();
+        });
+      });
+
+      const meses:number=6;
+      this.statisticsService.getMonthlySales(meses)
+      .subscribe(data => {
+
+        this.ventas = data;
+        this.cd.detectChanges();
+
+        setTimeout(() => {
+          this.crearGrafico();
+        });
+      });
   }
 
-  ngAfterViewInit() {
-    new Chart('salesChart', {
+  crearGrafico() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    this.chart = new Chart('salesChart', {
       type: 'bar',
       data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+        labels: this.ventas.data.labels,
         datasets: [{
-          label: 'Ventas',
-          data: [1200, 1800, 1500, 2200, 2800, 3100],
+          label: this.ventas.data.datasets[0].label,
+          data: this.ventas.data.datasets[0].data,
           backgroundColor: '#003594'
         }]
       },

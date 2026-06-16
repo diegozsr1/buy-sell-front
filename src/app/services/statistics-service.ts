@@ -13,4 +13,8 @@ export class StatisticsService {
      getStatisticsByPeriod(period:string):Observable<any>{
       return this.httpClient.get<any>(this.baseUrl+`dashboard?temporalidad=${period}`);
     }
+
+    getMonthlySales(meses:number):Observable<any>{
+      return this.httpClient.get<any>(this.baseUrl+`ventas-mensuales?meses=${meses}`);
+    }
 }
