@@ -30,23 +30,32 @@
         @if(categorias){
             @for(categoria of categorias;track categoria.id){
                 <div class="card">
-            <div class="card-body">
-                <h2 class="card-title">{{categoria.nombre}}</h2>
-                <h6 class="card-subtitle mb-2 text-muted">142 artículos</h6>
-                <div class="acciones">
-                    <a [routerLink]="['/admin/panel/categories/edit/',categoria.id]">Editar</a>
-                    <a class="borrar" (click)="borrar(categoria.id)">Borrar</a>
+                    <div class="card-body">
+                        <div class="icono-categoria">
+                            <i class="bi bi-tag"></i>
+                        </div>
+                    
+                        <div class="info-categoria">
+                            <h2 class="card-title">{{categoria.nombre}}</h2>
+                            <h6 class="card-subtitle mb-2 text-muted">142 artículos</h6>
+                        </div>
+                    
+                        <div class="acciones">
+                            <a [routerLink]="['/admin/panel/categories/edit/', categoria.id]">
+                                <span class="texto-accion">Editar</span>
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        
+                            <a class="borrar" (click)="borrar(categoria.id)">
+                                <span class="texto-accion">Borrar</span>
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
             }
-        }@else{
-            <p>No hay datos</p>
-        }
-        
-
+            }@else{
+                <p>No hay datos</p>
+            }
     </div>
-
-
-
 </section>
