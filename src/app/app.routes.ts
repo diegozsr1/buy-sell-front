@@ -20,16 +20,18 @@ import { roleGuard } from './guards/role-guard';
 import { ChatComponentComponent } from './pages/chat-component/chat-component.component';
 import { C403componentComponent } from './errors/c403component/c403component.component';
 import { C500componentComponent } from './errors/c500component/c500component.component';
-import { UsuariosRoles } from './components/usuarios-roles/usuarios-roles';
-import { Panel } from './components/panel/panel';
-import { Categories } from './components/categories/categories';
-import { Statistics } from './components/statistics/statistics';
+import { UsuariosRoles } from './components/admin/usuarios-roles/usuarios-roles';
+import { Panel } from './components/admin/panel/panel';
+import { Categories } from './components/admin/categories/categories';
+import { Statistics } from './components/admin/statistics/statistics';
 import { Admin } from './pages/admin/admin';
-import { Reports } from './components/reports/reports';
-import { Historic } from './components/historic/historic';
-import { Ratings } from './components/ratings/ratings';
-import { Settings } from './components/settings/settings';
-import { DetalleUsuario } from './components/detalle-usuario/detalle-usuario';
+import { Reports } from './components/admin/reports/reports';
+import { Historic } from './components/admin/historic/historic';
+import { Ratings } from './components/admin/ratings/ratings';
+import { Settings } from './components/admin/settings/settings';
+import { DetalleUsuario } from './components/admin/detalle-usuario/detalle-usuario';
+import { CreateCategory } from './components/admin/categories/create-category/create-category';
+import { EditCategory } from './components/admin/categories/edit-category/edit-category';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -89,6 +91,14 @@ export const routes: Routes = [
                     {
                         path: 'categories',
                         component: Categories
+                    },
+                    {
+                        path: 'categories/create',
+                        component: CreateCategory
+                    },
+                    {
+                        path: 'categories/edit/:id',
+                        component: EditCategory
                     },
                     {
                         path: 'statistics',
