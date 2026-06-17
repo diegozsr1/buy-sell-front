@@ -29,10 +29,12 @@ import { Historic } from './components/historic/historic';
 import { Ratings } from './components/ratings/ratings';
 import { Settings } from './components/settings/settings';
 import { DetalleUsuario } from './components/detalle-usuario/detalle-usuario';
+import { HomeHeroComponent } from './pages/home-hero-component/home-hero-component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
     { path: 'home', component: HomeComponentComponent },
+    { path: 'home-hero', component: HomeHeroComponent },
     { path: 'login', component: LoginComponentComponent },
     { path: 'register', component: UserFormComponentComponent },
     { path: 'product/:productID', component: ProductViewComponentComponent },
