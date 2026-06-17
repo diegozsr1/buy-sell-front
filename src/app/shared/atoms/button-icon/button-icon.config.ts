@@ -14,6 +14,12 @@ export enum ButtonIconStates {
     INACTIVED = "inactived"
 }
 
+/** Component Configuration Interface */
+export interface ButtonIconConfig {
+    actived?:   string;
+    hover?:     string;
+    inactived?: string;
+}
 
 
 

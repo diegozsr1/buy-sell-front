@@ -1,19 +1,10 @@
-import {  ButtonIconVariant } from  './button-icon.config'
+import {  ButtonIconVariant, ButtonIconConfig } from  './button-icon.config'
 
 /** Bootstrap Styles Configuration */
-
-/** HTML Element State Interfaces */
-interface HtmlIconStates {
-    default?:   string;
-    actived?:   string;
-    hover?:     string;
-    inactived?: string;
-}
-
 /** HTML Dinamic Elements*/
 interface HtmlElements {
   btn:  Object;
-  icon: HtmlIconStates;
+  icon: ButtonIconConfig;
   iconText?: string;
   label?: string;
 }
@@ -38,35 +29,35 @@ export const BOOTSTRAP_STYLES: ButtonVariantMap = {
   home:  {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-house-fill",
+        actived: "bi bi-house-fill",
     }, 
     label: "INICIO",
   },
   search: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-search",
+        actived: "bi bi-search",
     }, 
     label: "BUSCAR",
   },
   sell: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon:{ 
-        default: "bi bi-plus-lg",
+        actived: "bi bi-plus-lg",
     },
     label: "VENDER",
   },
   message: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon:{ 
-        default: "bi bi-chat-fill",
+        actived: "bi bi-chat-fill",
     },  
     label: "MENSAJES",
   },
   profile: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon:{ 
-        default: "bi bi-person-fill",
+        actived: "bi bi-person-fill",
     },
     label: "PERFIL",
   },
@@ -81,21 +72,21 @@ export const BOOTSTRAP_STYLES: ButtonVariantMap = {
   pencil: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-pen",
+        actived: "bi bi-pen",
     }, 
     label: "",
   },
   trash: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-trash3",
+        actived: "bi bi-trash3",
     }, 
     label: "",
   },
   clip: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-paperclip",
+        actived: "bi bi-paperclip",
     }, 
     label: "",
   },
@@ -110,63 +101,63 @@ export const BOOTSTRAP_STYLES: ButtonVariantMap = {
   microphone: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-mic",
+        actived: "bi bi-mic",
     }, 
     label: "",
   },
   photo: {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-camera",
+        actived: "bi bi-camera",
     }, 
     label: "",
   },
   'arrow-left': {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-arrow-left",
+        actived: "bi bi-arrow-left",
     }, 
     label: "",
   },
   'arrow-right': {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-arrow-right",
+        actived: "bi bi-arrow-right",
     }, 
     label: "",
   },
   'arrow-left-circle': {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-arrow-left",
+        actived: "bi bi-arrow-left",
     }, 
     label: "",
   },
   'arrow-right-circle': {
     btn:  BOOTSTRAP_STYLE_BTN_CIRCLE,
     icon: { 
-        default: "bi bi-arrow-right",
+        actived: "bi bi-arrow-right",
     }, 
     label: "",
   },
   'trash-button': {
     btn:  BOOTSTRAP_STYLE_BTN_SQUARE,
     icon: { 
-        default: "bi bi-trash3",
+        actived: "bi bi-trash3",
     }, 
     label: "",
   },
   'add-photo': {
     btn:  BOOTSTRAP_STYLE_BTN_SQUARE_ROUNDED,
     icon: { 
-        default: "bi bi-arrow-right",
+        actived: "bi bi-arrow-right",
     }, 
     label: "",
   },
   'add-photo-icon': {
     btn:  BOOTSTRAP_STYLE_BTN_SQUARE_ROUNDED,
     icon: { 
-        default: "bi bi-camera",
+        actived: "bi bi-camera",
     }, 
     iconText: "SUBIR",
   },

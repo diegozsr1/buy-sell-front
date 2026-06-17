@@ -50,7 +50,7 @@ export class ButtonIcon {
 
   protected iconClass = computed(() => {
     const variant = BOOTSTRAP_STYLES[this.variant()].icon;
-    const style = `${variant?.[this.state()] ?? variant?.['default']} icon--${this.variant()} ${this.state()}`
+    const style = `${variant?.[this.state()] ?? variant?.['actived']} icon--${this.variant()} ${this.state()}`
     return style;
   });
 
