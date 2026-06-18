@@ -1,25 +1,7 @@
 <nav class="bottom-nav">
-  <atom-button-icon variant="home" [link]="['/home']" size="28px"></atom-button-icon>
-  
-  <a [routerLink]="['/buscar']" routerLinkActive="active">
-    <i class="bi bi-search mobile-icon"></i>
-    <p>BUSCAR</p>
-  </a>
-
-  <a [routerLink]="['/new-product']" routerLinkActive="active" class="sell-btn">
-    <i class="bi bi-plus-lg mobile-icon"></i>
-      <p>VENDER</p>
-  </a>
-
-  <a [routerLink]="['/messages']" routerLinkActive="active">
-    <i class="bi bi-chat-fill mobile-icon"></i>
-    <p>MENSAJES</p>
-  </a>
-
-  <a [routerLink]="['/profile']" routerLinkActive="active">
-    <i class="bi bi-person-fill mobile-icon"></i>
-    <p>PERFIL</p>
-  </a>
-
-
+  <atom-link-icon variant="home"    [link]="['/home']" text="INICIO" size="28px"></atom-link-icon>
+  <atom-link-icon variant="search"  [link]="['/buscar']" text="BUSCAR" size="28px"></atom-link-icon>
+  <atom-link-icon class="sell" variant="sell"    [link]="['/new-product']" text="VENDER" size="28px"></atom-link-icon>
+  <atom-link-icon variant="message" [link]="['/messages']" text="MENSAJES" size="28px"></atom-link-icon>
+  <atom-link-icon variant="profile" [link]="['/profile']" text="PERFIL" size="28px"></atom-link-icon>
 </nav>
