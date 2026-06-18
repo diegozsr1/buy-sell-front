@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { IArticle } from '../../../interfaces/i-article';
+import { ArticlesService } from '../../../services/articles-service';
 
 @Component({
   selector: 'app-nl-inicio',
@@ -7,5 +9,35 @@ import { Component } from '@angular/core';
   styleUrl: './nl-inicio.css',
 })
 export class NLInicio {
-  items = Array.from({ length: 4 }, (_, i) => i + 1);
+  mensaje: string = '';
+  tipo: boolean = false;
+  recents: IArticle[] = [];
+  bestSellers:IArticle[] = [];
+  articlesService = inject(ArticlesService);
+
+  constructor(private cd: ChangeDetectorRef){}
+
+  ngOnInit() {
+    this.articlesService.getArticlesRecentlyUploaded().subscribe((data) => {
+      if (data.error) {
+        this.mensaje = data.error;
+        return;
+      } else {
+        console.log(data);
+        this.recents = data;
+        this.cd.detectChanges();
+      }
+    });
+    
+    this.articlesService.getArticlesBestSellers().subscribe((data) => {
+      if (data.error) {
+        this.mensaje = data.error;
+        return;
+      } else {
+        console.log(data.articulos);
+        this.bestSellers = data.articulos;
+        this.cd.detectChanges();
+      }
+    });
+  }
 }
