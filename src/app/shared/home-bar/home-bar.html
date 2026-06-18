@@ -1,0 +1,19 @@
+<section>
+    <div>
+        <img class="img1"
+            src="https://res.cloudinary.com/djqduukxt/image/upload/v1781765076/categorias/iconos/bca1btzgumu7vbmkiznc.png"
+            alt="">
+        <p>Todo</p>
+    </div>
+    @if(categorias){
+    @for(categoria of categorias;track categoria.id){
+    <div>
+        <img src="{{categoria.icono}}"
+            alt="">
+        <p>{{categoria.nombre}}</p>
+    </div>
+    }
+    }
+
+
+</section>
