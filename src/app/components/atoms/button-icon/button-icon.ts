@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, output, signal } from '@angular/core';
-import { ButtonIconVariant, ButtonIconStates} from  './button-icon.config'
-import { BOOTSTRAP_STYLES } from './button-icon.styles'
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgTemplateOutlet } from '@angular/common';
+import { ButtonIconVariant, ButtonIconStates} from  './button-icon.config';
+import { STYLES } from './button-icon.styles';
 /**
  * Atom Button icon type
  *
@@ -25,7 +23,7 @@ import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'atom-button-icon',
-  imports: [RouterLink, RouterLinkActive, NgTemplateOutlet],
+  imports: [],
   templateUrl: './button-icon.html',
   styleUrl: './button-icon.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +33,6 @@ export class ButtonIcon {
   variant   = input<ButtonIconVariant>('like');
   size      = input<string>('400px');
   text_icon = input<string>('');
-  link  = input<string | unknown[] | null>(null);
 
   /* Public outputs */
   clicked   = output<boolean>();
@@ -45,19 +42,19 @@ export class ButtonIcon {
   
   /* Component Computed Styles */
   protected btnClass = computed(() =>  {
-    const variant = BOOTSTRAP_STYLES[this.variant()].btn;
+    const variant = STYLES[this.variant()].btn;
     const style = `${variant} btn-icon btn--${this.variant()} ${this.state()}`
     return style;
   });
 
   protected linkClass = computed(() =>  {
-    const variant = BOOTSTRAP_STYLES[this.variant()].link;
+    const variant = STYLES[this.variant()].btn;
     const style = `${variant} btn-icon btn--${this.variant()} ${this.state()}`
     return style;
   });
 
   protected iconClass = computed(() => {
-    const variant = BOOTSTRAP_STYLES[this.variant()].icon;
+    const variant = STYLES[this.variant()].icon;
     const style = `${variant[this.state()]} icon--${this.variant()} ${this.state()}`
     return style;
   });
@@ -69,12 +66,12 @@ export class ButtonIcon {
 
   /* Component Computed Text */
   protected label_text  = computed(() => {  
-    const text = BOOTSTRAP_STYLES[this.variant()].label;
+    const text = STYLES[this.variant()].label;
     return text;
   });
 
   protected label_icon_text = computed(() => {  
-    const text = BOOTSTRAP_STYLES[this.variant()].iconText;
+    const text = STYLES[this.variant()].iconText;
     return text;
   });
 
