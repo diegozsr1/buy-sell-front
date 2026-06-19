@@ -8,8 +8,8 @@ import { RouterLink } from "@angular/router";
   styleUrl: './admin-moderator-menu-drawer.component.css',
 })
 export class AdminModeratorMenuDrawerComponent {
-  userInitials = 'AU';
-  adminName = 'Admin User'
+  userInitials = '';
+  adminName = ''
 
   @Output() closeMenu = new EventEmitter<void>();
 
