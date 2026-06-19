@@ -7,7 +7,7 @@ img {
 }
 
 h2 {
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: #0B1C30;
@@ -103,7 +103,7 @@ button {
 }
 
 .contenedor a {
-    margin-top: 2rem;
+    margin-top: 1rem;
     color: #FE6B00;
     font-weight: bold;
     font-size: .9rem;
