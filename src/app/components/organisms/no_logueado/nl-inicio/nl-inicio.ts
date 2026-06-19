@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
-import { IArticle } from '../../../interfaces/i-article';
-import { ArticlesService } from '../../../services/articles-service';
+import { IArticle } from '../../../../interfaces/i-article';
+import { ArticlesService } from '../../../../services/articles-service';
 import { RouterLink } from '@angular/router';
 
 @Component({
