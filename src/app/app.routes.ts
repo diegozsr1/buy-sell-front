@@ -35,6 +35,7 @@ import { CreateCategory } from './components/organisms/admin/categories/create-c
 import { EditCategory } from './components/organisms/admin/categories/edit-category/edit-category';
 import { IncidentsComponentComponent } from './pages/incidents-component/incidents-component.component';
 import { HistoricModeratorComponentComponent } from './pages/historic-moderator-component/historic-moderator-component.component';
+import { PanelUser } from './components/organisms/user/panel-user/panel-user';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -52,7 +53,14 @@ export const routes: Routes = [
             { path: 'product/:productID', component: ProductViewComponentComponent },
             { path: 'product/edit/:productID', component: ProductFormComponentComponent },
             { path: 'product/checkout/:productID', component: ProductCheckoutComponentComponent },
-            { path: 'profile', component: UserProfileComponentComponent },
+            { path: 'panel', component: UserProfileComponentComponent,
+                children: [
+                    { path: '', pathMatch: 'full', redirectTo: 'profile' },
+                    {
+                        path: 'profile',
+                        component: PanelUser
+                    }]
+             },
             { path: 'edit-profile/:userID', component: UserFormComponentComponent },
             { path: 'favorites', component: FavoritesComponentComponent },
             // Ruta Mensajeria
