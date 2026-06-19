@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 import { RatingsService } from '../../../services/ratings-service';
 
 @Component({
   selector: 'app-moderator-sidebar',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './moderator-sidebar.component.html',
   styleUrl: './moderator-sidebar.component.css',
 })
