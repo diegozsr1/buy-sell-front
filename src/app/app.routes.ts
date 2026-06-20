@@ -10,7 +10,7 @@ import { UserProfileComponentComponent } from './pages/user-profile-component/us
 import { FavoritesComponentComponent } from './pages/favorites-component/favorites-component.component';
 import { MessagesComponentComponent } from './pages/messages-component/messages-component.component';
 import { ModeratorPanelComponentComponent } from './components/organisms/moderator/moderator-panel-component/moderator-panel-component.component';
-import { IncidentViewComponentComponent } from './components/organisms/moderator/incident-view-component/incident-view-component.component';
+import { IncidentViewComponentComponent } from './components/organisms/moderator/incidents-component/incident-view-component/incident-view-component.component';
 import { UserComponentComponent } from './pages/user-component/user-component.component';
 import { ModeratorComponentComponent } from './pages/moderator-component/moderator-component.component';
 import { AdminComponentComponent } from './pages/admin-component/admin-component.component';
@@ -36,7 +36,7 @@ import { EditCategory } from './components/organisms/admin/categories/edit-categ
 import { IncidentsComponentComponent } from './components/organisms/moderator/incidents-component/incidents-component.component';
 import { HistoricModeratorComponentComponent } from './components/organisms/moderator/historic-moderator-component/historic-moderator-component.component';
 import { ModeratorComponent } from './pages/moderator/moderator.component';
-import { IncidentReportDetailComponent } from './components/organisms/moderator/incident-report-detail-component/incident-report-detail-component';
+import { IncidentReportDetailComponent } from './components/organisms/moderator/incidents-component/incident-report-detail-component/incident-report-detail-component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
