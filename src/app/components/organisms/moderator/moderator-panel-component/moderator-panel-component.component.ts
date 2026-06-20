@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { ReportsService } from '../../../../services/reports-service';
 
@@ -16,6 +16,8 @@ export class ModeratorPanelComponentComponent {
   pendientes = 0;
   resueltos = 0;
   abiertosHoy = 0;
+
+  constructor(private cd: ChangeDetectorRef){}
 
   ngOnInit() {
     const usuarioString = localStorage.getItem('usuarioBuy&Sell');
@@ -45,6 +47,8 @@ export class ModeratorPanelComponentComponent {
         this.abiertosHoy = reportes.filter((reporte: any) =>
           reporte.created_at?.split('T')[0] === hoy
         ).length;
+
+        this.cd.detectChanges();
       },
       error: (error) => {
         console.error('Error cargando reportes:', error);
