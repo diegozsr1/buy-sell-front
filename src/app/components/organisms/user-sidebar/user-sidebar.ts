@@ -14,6 +14,7 @@ export class UserSidebar {
     user:any={};
     ratingsService = inject(RatingsService);
     ratings:any={};
+    puntuacion_media='';
 
     constructor(private cd: ChangeDetectorRef) { }
 
@@ -29,9 +30,11 @@ export class UserSidebar {
       } else {
         console.log(data);
         this.ratings = data;
+        this.puntuacion_media=this.ratings.puntuacion_media.toFixed(1);
         this.cd.detectChanges();
       }
     });
+    
 
     }
   }
