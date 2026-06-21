@@ -77,7 +77,7 @@ export class EditArticle {
           categoria: this.articulo?.categorias_id,
           descripcion: this.articulo?.descripcion,
           precio: this.articulo?.precio,
-          ubicacion: '08096'
+          ubicacion: this.articulo?.cp + ` (${this.articulo?.provincia?.nombre})`
         });
 
         this.cd.detectChanges();

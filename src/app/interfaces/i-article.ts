@@ -13,4 +13,5 @@ export interface IArticle {
     estado_conservacion_id:string;
     estado_articulo_id:string;
     provincia?:Provincia;
+    cp?:string;
 }
