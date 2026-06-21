@@ -37,4 +37,7 @@
   .sidebar {
     display: none;
   }
+  .home-bar{
+    display: none;
+  }
 }

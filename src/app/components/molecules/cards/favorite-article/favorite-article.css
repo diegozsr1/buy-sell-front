@@ -32,7 +32,8 @@
 }
 /*css articulo*/
 .card{
-    flex: 0 0 31%;
+    position: relative;
+    width: 100%;
 }
 .contenedor p:first-child{
     color: #444652;
