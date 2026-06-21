@@ -10,7 +10,7 @@ export class PhotosService {
   private baseUrl=`${environment.apiUrl}/articulo_fotos/`;
     httpClient=inject(HttpClient);
   
-   getAllPhotos():Observable<any>{
-    return this.httpClient.get<any>(this.baseUrl);
+   getAllPhotosByArticle(article_id:number):Observable<any>{
+    return this.httpClient.get<any>(this.baseUrl+`get-all-by-article/${article_id}`);
   }
 }

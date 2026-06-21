@@ -22,11 +22,11 @@ export class EditArticle {
   tipo: boolean = false;
   articlesService = inject(ArticlesService);
   articulo!: IArticle;
-  categoriesService=inject(CategoriesService);
-  categorias:ICategory[]=[];
-  photosService=inject(PhotosService);
-  fotos:IPhoto[]=[];
-  id!:string;
+  categoriesService = inject(CategoriesService);
+  categorias: ICategory[] = [];
+  photosService = inject(PhotosService);
+  fotos: IPhoto[] = [];
+  id!: string;
 
   constructor(private cd: ChangeDetectorRef, private route: ActivatedRoute) {
     this.miForm = new FormGroup({
@@ -47,7 +47,7 @@ export class EditArticle {
       ubicacion: new FormControl('', [
         Validators.required
       ]),
-      provincia: new FormControl({ value: '', disabled: true },[])
+      provincia: new FormControl({ value: '', disabled: true }, [])
     }, []);
   }
   get titulo() {
@@ -80,7 +80,20 @@ export class EditArticle {
           descripcion: this.articulo?.descripcion,
           precio: this.articulo?.precio,
           ubicacion: this.articulo?.cp,
-          provincia:this.articulo?.provincia?.nombre
+          provincia: this.articulo?.provincia?.nombre
+        });
+
+
+        this.photosService.getAllPhotosByArticle(this.articulo.id).subscribe({
+          next: (data) => {
+            this.fotos = data;
+            console.log(this.fotos);
+
+            this.cd.detectChanges();
+          },
+          error: (error) => {
+            console.error('Error cargando la categoría:', error);
+          }
         });
 
         this.cd.detectChanges();
@@ -101,18 +114,8 @@ export class EditArticle {
         console.error('Error cargando la categoría:', error);
       }
     });
-    
-    this.photosService.getAllPhotos().subscribe({
-      next: (data) => {
-        this.fotos = data;
-        console.log(this.fotos);
 
-        this.cd.detectChanges();
-      },
-      error: (error) => {
-        console.error('Error cargando la categoría:', error);
-      }
-    });
+
 
   }
   loadData() {
@@ -120,15 +123,15 @@ export class EditArticle {
       this.miForm.markAllAsTouched();
       return;
     }
-    
-    this.miForm.value.usuarios_id=this.articulo.usuarios_id;
-    this.miForm.value.estado_conservacion_id=this.articulo.estado_conservacion_id;
-    this.miForm.value.estado_articulo_id=this.articulo.estado_articulo_id;
+
+    this.miForm.value.usuarios_id = this.articulo.usuarios_id;
+    this.miForm.value.estado_conservacion_id = this.articulo.estado_conservacion_id;
+    this.miForm.value.estado_articulo_id = this.articulo.estado_articulo_id;
 
     console.log(this.miForm.value);
     console.log(this.articulo);
-    
-    this.articlesService.updateArticleAndCP(Number(this.id),this.miForm.value).subscribe({
+
+    this.articlesService.updateArticleAndCP(Number(this.id), this.miForm.value).subscribe({
       next: (data) => {
         console.log('Actualizado correctamente');
       },
@@ -136,6 +139,6 @@ export class EditArticle {
         console.error('Error cargando artículo:', error);
       }
     });
-    
+
   }
 }
