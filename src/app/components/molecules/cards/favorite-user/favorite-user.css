@@ -69,3 +69,9 @@
     
     margin:0 1rem;
   }
+  /* Mobile */
+@media (max-width: 768px) {
+  atom-button{
+    display: none;
+  }
+}
