@@ -16,7 +16,7 @@ import { IPhoto } from '../../../../interfaces/i-photo';
 })
 export class EditArticle {
   /* TODO: Hacer que salgan solo las fotos del artículo ahora mismo vienen las fotos de todos los artículos */
-  /* TODO: Solucionar lo del código postal */
+  /* TODO: boton guardar */
   miForm: FormGroup;
   mensaje: string = '';
   tipo: boolean = false;
@@ -26,6 +26,7 @@ export class EditArticle {
   categorias:ICategory[]=[];
   photosService=inject(PhotosService);
   fotos:IPhoto[]=[];
+  id!:string;
 
   constructor(private cd: ChangeDetectorRef, private route: ActivatedRoute) {
     this.miForm = new FormGroup({
@@ -45,7 +46,8 @@ export class EditArticle {
       ]),
       ubicacion: new FormControl('', [
         Validators.required
-      ])
+      ]),
+      provincia: new FormControl({ value: '', disabled: true },[])
     }, []);
   }
   get titulo() {
@@ -64,10 +66,10 @@ export class EditArticle {
     return this.miForm.get('ubicacion');
   }
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id')!;
-    console.log(id);
+    this.id = this.route.snapshot.paramMap.get('id')!;
+    console.log(this.id);
 
-    this.articlesService.getArticleById(Number(id)).subscribe({
+    this.articlesService.getArticleById(Number(this.id)).subscribe({
       next: (data) => {
         this.articulo = data;
         console.log(this.articulo);
@@ -77,7 +79,8 @@ export class EditArticle {
           categoria: this.articulo?.categorias_id,
           descripcion: this.articulo?.descripcion,
           precio: this.articulo?.precio,
-          ubicacion: this.articulo?.cp + ` (${this.articulo?.provincia?.nombre})`
+          ubicacion: this.articulo?.cp,
+          provincia:this.articulo?.provincia?.nombre
         });
 
         this.cd.detectChanges();
@@ -117,6 +120,22 @@ export class EditArticle {
       this.miForm.markAllAsTouched();
       return;
     }
+    
+    this.miForm.value.usuarios_id=this.articulo.usuarios_id;
+    this.miForm.value.estado_conservacion_id=this.articulo.estado_conservacion_id;
+    this.miForm.value.estado_articulo_id=this.articulo.estado_articulo_id;
+
     console.log(this.miForm.value);
+    console.log(this.articulo);
+    
+    this.articlesService.updateArticleAndCP(Number(this.id),this.miForm.value).subscribe({
+      next: (data) => {
+        console.log('Actualizado correctamente');
+      },
+      error: (error) => {
+        console.error('Error cargando artículo:', error);
+      }
+    });
+    
   }
 }
