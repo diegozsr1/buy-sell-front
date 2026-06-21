@@ -65,6 +65,10 @@ export const routes: Routes = [
                     {
                         path: 'favorites',
                         component: Favorites
+                    },
+                    {
+                        path: 'sales',
+                        component: Favorites
                     }
                 ]
              },
