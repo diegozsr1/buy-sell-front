@@ -1,7 +1,9 @@
 import { NgStyle } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { SalesArticle } from '../../../molecules/cards/sales-article/sales-article';
+import { IArticle } from '../../../../interfaces/i-article';
+import { ArticlesService } from '../../../../services/articles-service';
 
 @Component({
   selector: 'app-sales',
@@ -14,12 +16,32 @@ export class Sales {
   activeTab: 'En venta' | 'Vendidos' = 'En venta';
   fecha_publicacion: Date = new Date('2025-01-01');
   tiempo: string='';
+  articlesService = inject(ArticlesService);
+  articulos!: IArticle[];
 
   constructor(private cd: ChangeDetectorRef,private router: Router){}
 
   ngOnInit() {
     this.tiempo=this.tiempoTranscurrido(this.fecha_publicacion);
     this.cd.detectChanges();
+
+    const usuarioString = localStorage.getItem('usuarioBuy&Sell');
+    if (usuarioString) {
+      const user = JSON.parse(usuarioString);
+
+      this.articlesService.getArticlesByUser(Number(user.id)).subscribe({
+      next: (data) => {
+        this.articulos = data;
+        console.log(this.articulos);
+
+        this.cd.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error cargando artículo:', error);
+      }
+    });
+    } 
+    
   }
 
   tiempoTranscurrido(fechaInicio: Date):string {

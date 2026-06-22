@@ -68,7 +68,7 @@ export class DetalleUsuario {
           }
         });
 
-        this.articlesService.getArticlesByUser(this.usuario.id).subscribe((data) => {
+        this.articlesService.getCountArticlesByUser(this.usuario.id).subscribe((data) => {
           if (data.error) {
             this.mensaje = data.error;
             return;
