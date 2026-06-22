@@ -8,25 +8,22 @@ import { IArticle } from '../interfaces/i-article';
   providedIn: 'root',
 })
 export class ArticlesService {
-  private baseUrl=`${environment.apiUrl}/articulos/`;
+  private baseUrl = `${environment.apiUrl}/articulos/`;
+  httpClient = inject(HttpClient);
 
-  httpClient=inject(HttpClient);
-
-  getArticleById(id:string):Promise<IArticle>{
-    return lastValueFrom(this.httpClient.get<IArticle>(this.baseUrl+`${id}`));
+  getArticlesByUser(user_id: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + `usuario/${user_id}/publicados`);
   }
 
-  getArticlesByUser(user_id:number):Observable<any>{
-  return this.httpClient.get<any>(this.baseUrl+`usuario/${user_id}/publicados`);
+  getArticlesRecentlyUploaded(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + 'recientes');
   }
 
-  getArticlesRecentlyUploaded():Observable<any>{
-    return this.httpClient.get<any>(this.baseUrl+`recientes`);
+  getArticlesBestSellers(): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + 'mas-vendidos');
   }
 
-  getArticlesBestSellers():Observable<any>{
-    return this.httpClient.get<any>(this.baseUrl+`mas-vendidos`);
+  getArticleById(id: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + id);
   }
-
-
 }
