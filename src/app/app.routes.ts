@@ -8,6 +8,7 @@ import { ProductFormComponentComponent } from './pages/product-form-component/pr
 import { ProductCheckoutComponentComponent } from './pages/product-checkout-component/product-checkout-component.component';
 import { UserProfileComponentComponent } from './pages/user-profile-component/user-profile-component.component';
 import { FavoritesComponentComponent } from './pages/favorites-component/favorites-component.component';
+import { UserMyPurchasesComponentComponent } from './pages/user-my-purchases-component/user-my-purchases-component.component';
 import { MessagesComponentComponent } from './pages/messages-component/messages-component.component';
 import { ModeratorPanelComponentComponent } from './components/organisms/moderator/moderator-panel-component/moderator-panel-component.component';
 import { IncidentViewComponentComponent } from './components/organisms/moderator/incident-view-component/incident-view-component.component';
@@ -56,6 +57,7 @@ export const routes: Routes = [
             { path: 'profile', component: UserProfileComponentComponent },
             { path: 'edit-profile/:userID', component: UserFormComponentComponent },
             { path: 'favorites', component: FavoritesComponentComponent },
+            { path: 'my-purchases', component: UserMyPurchasesComponentComponent },
             // Ruta Mensajeria
             { path: 'messages', component: MessagesComponentComponent },
             { path: 'messages/:chatID', component: ChatComponentComponent },
