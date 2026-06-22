@@ -18,6 +18,7 @@ export class Sales {
   activeTab: 'En venta' | 'Vendidos' = 'En venta';
   articlesService = inject(ArticlesService);
   articulos: IArticle[] = [];
+  articulos_filtrados:IArticle[]=[];
 
   constructor(private cd: ChangeDetectorRef, private router: Router) { }
 
@@ -31,6 +32,9 @@ export class Sales {
       this.articlesService.getArticlesByUser(Number(user.id)).subscribe({
         next: (data) => {
           this.articulos = data;
+          this.articulos_filtrados=this.articulos.filter(
+            (a) => a.estado_articulo_id === 'Vendido'
+          );
           console.log(this.articulos);
 
           this.cd.detectChanges();
