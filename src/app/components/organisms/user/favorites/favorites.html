@@ -18,7 +18,7 @@
     <p>6 artículos guardados</p>
 
     <div class="contenedor">
-      <!--@for (article of articles; track article.id) {-->
+      @for (favorito of favoritos; track favorito.id) {
       <app-favorite-article
         texto_articulo="NVIDIA RTX 4070 Ti Super 16GB GDDR6X" 
         ubicacion="León" 
@@ -30,40 +30,8 @@
         [articleId]="2" 
         (clicar)="irADetalleArticulo($event)" 
       ></app-favorite-article>
-      <app-favorite-article
-        texto_articulo="NVIDIA RTX 4070 Ti Super 16GB GDDR6X" 
-        ubicacion="León" 
-        iniciales="MR" 
-        nombre="Marta R." 
-        estrellas="4.8" 
-        valoraciones="124" 
-        texto_boton="Ver detalle" 
-        [articleId]="2" 
-        (clicar)="irADetalleArticulo($event)" 
-      ></app-favorite-article>
-      <app-favorite-article
-        texto_articulo="NVIDIA RTX 4070 Ti Super 16GB GDDR6X" 
-        ubicacion="León" 
-        iniciales="MR" 
-        nombre="Marta R." 
-        estrellas="4.8" 
-        valoraciones="124" 
-        texto_boton="Ver detalle" 
-        [articleId]="2" 
-        (clicar)="irADetalleArticulo($event)" 
-      ></app-favorite-article>
-      <app-favorite-article
-        texto_articulo="NVIDIA RTX 4070 Ti Super 16GB GDDR6X" 
-        ubicacion="León" 
-        iniciales="MR" 
-        nombre="Marta R." 
-        estrellas="4.8" 
-        valoraciones="124" 
-        texto_boton="Ver detalle" 
-        [articleId]="2" 
-        (clicar)="irADetalleArticulo($event)" 
-      ></app-favorite-article>
-      <!--}-->
+      
+      }
     </div>
   </div>
   }
