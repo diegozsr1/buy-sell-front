@@ -10,4 +10,9 @@ export interface IFavorite {
     total?:number;
     created_at?:string;
     updated_at?:string;
+    nombre_vendedor?:string;
+    apellidos_vendedor?:string;
+    cantidad_valoraciones?:number;
+    puntuacion?:string;
+    url_foto?:string;
 }

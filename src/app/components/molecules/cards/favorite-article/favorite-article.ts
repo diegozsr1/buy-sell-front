@@ -11,13 +11,19 @@ import { Button } from '../../../atoms/button/button';
 export class FavoriteArticle {
   @Input() texto_articulo!:string;
   @Input() ubicacion!:string;
-  @Input() iniciales!:string;
-  @Input() nombre!:string;
-  @Input() estrellas!:string;
-  @Input() valoraciones!:string;
+  @Input() iniciales!:string | undefined;
+  @Input() nombre!:string | undefined;
+  @Input() estrellas!:string | undefined;
+  @Input() valoraciones!:number | undefined;
   @Input() texto_boton!:string;
   @Input() articleId!:number;
+  @Input() precio!:string | undefined;
+  @Input() url_foto!:string | undefined;
   @Output() clicar = new EventEmitter<number>();
+
+  ngOnInit(){
+    console.log(this.url_foto);
+  }
 
   onClick():void {
   this.clicar.emit(this.articleId);

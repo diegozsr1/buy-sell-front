@@ -18,22 +18,26 @@
     <p>6 artículos guardados</p>
 
     <div class="contenedor">
+      
       @for (favorito of favoritos; track favorito.id) {
       <app-favorite-article
         [texto_articulo]="favorito.titulo" 
         ubicacion="León" 
-        iniciales="MR" 
-        nombre="Marta R." 
-        estrellas="4.8" 
-        valoraciones="124" 
+        [iniciales]="(favorito.nombre_vendedor)?favorito.nombre_vendedor[0]:'' + (favorito.apellidos_vendedor)?favorito.apellidos_vendedor?.[0]:''" 
+        [nombre]="favorito.nombre_vendedor + ' ' + favorito.apellidos_vendedor?.[0] + '.'" 
+        [estrellas]="(favorito.puntuacion)?favorito.puntuacion.slice(0,3):'0'" 
+        [valoraciones]="(favorito.cantidad_valoraciones)?favorito.cantidad_valoraciones:0" 
         texto_boton="Ver detalle" 
-        [articleId]="2" 
+        [articleId]="favorito.id" 
+        [precio]="favorito.precio"
+        [url_foto]="favorito.url_foto"
         (clicar)="irADetalleArticulo($event)" 
       ></app-favorite-article>
       
       }@empty{
         <p>No hay productos</p>
       }
+      
     </div>
   </div>
   }
