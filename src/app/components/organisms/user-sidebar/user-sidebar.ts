@@ -38,4 +38,8 @@ export class UserSidebar {
 
     }
   }
+  logout(){
+    localStorage.removeItem('usuarioBuy&Sell');
+    window.location.href = '/login';
+  }
 }
