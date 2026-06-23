@@ -106,11 +106,8 @@ button{
 
 .eliminar button {
     color: #DC2626;
-}
-.pausar button{
     border-left: 1px solid #CBD2DC;
-    border-right: 1px solid #CBD2DC;
-    padding: 0 .5rem;
+    padding-left: 1.2rem;
 }
 
 .precio-label {
