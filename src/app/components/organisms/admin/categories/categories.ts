@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CategoriesService } from '../../../../services/categories-service';
 import { ICategory } from '../../../../interfaces/i-category';
@@ -62,7 +62,8 @@ export class Categories {
       }
     });
   }
-  breadcrumbItems():BreadcrumbItem[] | undefined{
-    return;
-  }
+    protected breadcrumbItems = computed(() => [
+    { label: 'Panel', route: '/admin/panel/' },
+    { label: 'Categorías', route: 'categories'}
+  ]);
 }
