@@ -47,7 +47,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponentComponent },
     { path: 'product/:productID', component: ProductViewComponentComponent },
 
-    // // Rutas Home: Usuario Normal. Falta implemetar el Guard y hacer sus hijos
+    // // Rutas Home: Usuario Normal. 
     {
         path: 'user', component: UserComponentComponent, canActivate: [authGuard], children: [
             { path: '', pathMatch: 'full', redirectTo: 'profile' },
@@ -68,15 +68,19 @@ export const routes: Routes = [
                     }
                 ]
              },
+            /*{ path: 'profile/:userID', component: UserProfileComponentComponent },*/
             { path: 'edit-profile/:userID', component: UserFormComponentComponent },
             { path: 'favorites', component: FavoritesComponentComponent },
+            //reportes
+            {path: 'report/:productID', component: ProductViewComponentComponent},
+            {path: 'report/:userID', component: ProductViewComponentComponent},
             // Ruta Mensajeria
             { path: 'messages', component: MessagesComponentComponent },
             { path: 'messages/:chatID', component: ChatComponentComponent },
         ]
     },
 
-    // // Rutas Moderator Panel: Usuario Moderador. Falta implemetar el Guard
+    // // Rutas Moderator Panel: Usuario Moderador.
 
     {
         path: 'moderator', component: ModeratorComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Moderador']}, children: [
@@ -92,7 +96,7 @@ export const routes: Routes = [
         ]
     },
 
-    // // Rutas Admin Panel: Usuario Administrador. Falta implemetar el Guard
+    // // Rutas Admin Panel: Usuario Administrador. 
 
     {
         path: 'admin', component: AdminComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Administrador']}, children: [
