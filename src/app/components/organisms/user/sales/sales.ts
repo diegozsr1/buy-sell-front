@@ -94,7 +94,7 @@ export class Sales {
             if (data.error) {
               Swal.fire('Ha habido un error', '', 'info');
             } else {
-              Swal.fire('Eliminado!', '', 'success');
+              /*Swal.fire('Eliminado!', '', 'success');*/
               window.location.reload();
               
   

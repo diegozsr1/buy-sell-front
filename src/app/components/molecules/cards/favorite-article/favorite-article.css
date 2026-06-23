@@ -96,8 +96,14 @@ h5{
 .profile{
     margin-right: .5rem;
 }
-img{
-    max-height: 187.05px;
+.card-img-top {
+    width: 100%;
+    max-width: 230px;
+    height: 187px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    padding-top: 1rem;
 }
 /* Mobile */
 @media (max-width: 768px) {
