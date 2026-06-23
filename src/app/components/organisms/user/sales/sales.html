@@ -27,6 +27,7 @@
             [url_foto]="articulo.url_foto ?? 'imgs/no-photo.jpg'" 
             (clicarEditar)="editar($event)" 
             (clicarEliminar)="eliminar($event)"
+            (clicarPausar)="pausar($event)"
         ></app-sales-article>
         </div>
       }@empty{
