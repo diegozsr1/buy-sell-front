@@ -16,6 +16,14 @@ export interface IPurchase {
   updated_at: string;
 }
 
+export interface IPurchasePhoto {
+  id: number;
+  url_foto: string;
+  principal: number;
+  articulos_id: number;
+}
+
 export interface IUserPurchase extends IPurchase {
   nombre_articulo: string;
+  fotos?: IPurchasePhoto[];
 }

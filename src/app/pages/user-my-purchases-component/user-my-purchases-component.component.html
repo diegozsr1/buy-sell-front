@@ -12,7 +12,15 @@
       @for (purchase of purchases; track purchase.id) {
         <li class="purchase-card">
           <div class="purchase-card__image" aria-hidden="true">
-            <i class="bi bi-image"></i>
+            @if (getPrincipalPhoto(purchase); as photoUrl) {
+              <img
+                class="purchase-card__img"
+                [src]="photoUrl"
+                [alt]="purchase.nombre_articulo"
+              />
+            } @else {
+              <i class="bi bi-image"></i>
+            }
           </div>
 
           <div class="purchase-card__info">

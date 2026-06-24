@@ -1,7 +1,8 @@
 .my-purchases {
   max-width: 720px;
-  margin: 0 auto;
+  margin: 0;
   padding: 2rem 1.5rem 3rem;
+  text-align: left;
 }
 
 .my-purchases__title {
@@ -47,6 +48,13 @@
   background-color: var(--surface-container);
   color: var(--text-outline);
   font-size: 1.75rem;
+  overflow: hidden;
+}
+
+.purchase-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .purchase-card__info {

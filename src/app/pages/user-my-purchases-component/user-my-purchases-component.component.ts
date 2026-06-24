@@ -44,6 +44,11 @@ export class UserMyPurchasesComponentComponent {
     });
   }
 
+  getPrincipalPhoto(purchase: IUserPurchase): string | null {
+    const principal = purchase.fotos?.find((foto) => foto.principal === 1);
+    return principal?.url_foto ?? null;
+  }
+
   getPurchaseDetail(purchase: IUserPurchase): string {
     const date = purchase.updated_at ?? purchase.fecha_pedido;
     const verb = this.getStatusVerb(purchase.estado);
