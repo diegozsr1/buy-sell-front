@@ -13,4 +13,8 @@ export class RatingsService {
   getRatingsByUser(user_id:number): Observable<any> {
     return this.httpClient.get<any>(this.baseUrl + `usuario/${user_id}/promedio`);
   }
+
+  getDetailRatingsByUser(user_id:number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + `usuario/get-all/${user_id}`);
+  }
 }
