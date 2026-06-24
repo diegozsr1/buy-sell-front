@@ -1,1 +1,16 @@
-<p>article-card works!</p>
+<div class="article-card">
+    <div class="article-img">
+        <img [src]="img()" alt="">
+        <atom-badge [variant]="state()" class="article-badge desktop"/>
+        @if(like()){
+            <atom-button-icon variant="like" size="1rem" class="article-like"/>
+        }
+    </div>
+    <atom-badge [variant]="state()" class="article-badge mobile"/>
+    <p>{{price()}} €</p>
+    <h2 >{{name()}}</h2>
+    <div class="article-location">
+        <i class="bi bi-geo-alt"></i>
+        <p>{{location()}}</p>
+    </div>
+</div>
