@@ -79,6 +79,7 @@ export const routes: Routes = [
                 ]
              },
             /*{ path: 'profile/:userID', component: UserProfileComponentComponent }, */
+
             { path: 'edit-profile/:userID', component: UserFormComponentComponent },
             { path: 'favorites', component: FavoritesComponentComponent },
             //reportes
