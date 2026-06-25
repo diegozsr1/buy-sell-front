@@ -2,49 +2,42 @@
   display: block;
 }
 
-/* Mismo contenedor que el resto del panel (favoritos/ventas) */
+/* Mismo contenedor que el resto del panel (favoritos/ventas): section margin 3rem 2rem */
 .profile {
   margin: 3rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
 }
 
-/* ===== Cabecera ===== */
+/* ===== Cabecera de perfil ===== */
 .profile-header {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  background: #fff;
-  border: 1px solid #dbe1ea;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-container);
   border-radius: 1rem;
   padding: 1.5rem 2rem;
+  box-shadow: 0 4px 15px var(--surface-container);
 }
 
 .profile-header__info {
   display: flex;
   flex-direction: column;
-  gap: .35rem;
+  gap: 0.35rem;
 }
 
 .profile-name {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #0B1C30;
 }
 
-.profile-sub {
-  margin: 0;
-  color: #444652;
-  font-size: .9rem;
-}
-
-.profile-badges {
+.profile-meta {
   display: flex;
-  gap: .5rem;
-  flex-wrap: wrap;
-  margin-top: .25rem;
+  align-items: center;
+  gap: 0.5rem;
+  color: #444652;
+  font-size: 0.95rem;
 }
 
 .profile-edit {
@@ -64,6 +57,7 @@
   display: flex;
   gap: 1.25rem;
   flex-wrap: wrap;
+  margin: 1.5rem 0;
 }
 
 .profile-stats molecule-status-card {
@@ -71,19 +65,31 @@
   min-width: 150px;
 }
 
-/* ===== Accesos rápidos (lista de navegación) ===== */
-.profile-nav {
-  display: flex;
-  flex-direction: column;
-  gap: .75rem;
+/* ===== Mis artículos publicados (mismos parámetros de grid que favoritos) ===== */
+.section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0B1C30;
+  margin: 1.5rem 0 1rem;
 }
 
-/* ===== CTA ===== */
-.profile-cta {
+.contenedor {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.contenedor molecule-article-card {
+  flex: 0 0 31%;
   display: flex;
 }
 
-/* ===== Mobile (mismo breakpoint del equipo: 768px) ===== */
+.empty {
+  color: #747683;
+}
+
+/* ===== Mobile — mismo breakpoint del equipo (768px) ===== */
 @media (max-width: 768px) {
   .profile {
     margin: 1.5rem 1rem;
@@ -94,5 +100,8 @@
   .profile-edit {
     margin-left: 0;
     width: 100%;
+  }
+  .contenedor molecule-article-card {
+    flex: 0 0 100%;
   }
 }
