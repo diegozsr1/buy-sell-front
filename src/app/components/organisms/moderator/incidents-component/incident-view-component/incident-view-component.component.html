@@ -61,16 +61,7 @@
                             </div>
 
                             <div class="motivo-estado">
-                                <span
-                                    class="tag"
-                                    [class.tag-pendiente]="reporte.estado?.toLowerCase() === 'pendiente'"
-                                    [class.tag-revision]="reporte.estado?.toLowerCase() === 'revisado'"
-                                    [class.tag-aceptado]="reporte.estado?.toLowerCase() === 'aceptado'"
-                                    [class.tag-descartado]="reporte.estado?.toLowerCase() === 'descartado'"
-                                >
-                                    {{ getEstadoFront(reporte.estado) }}
-                                </span>
-
+                                <span class="tag" [class.tag-pendiente]="reporte.estado?.toLowerCase() === 'pendiente'" [class.tag-revision]="reporte.estado?.toLowerCase() === 'revisado'" [class.tag-aceptado]="reporte.estado?.toLowerCase() === 'aceptado'" [class.tag-descartado]="reporte.estado?.toLowerCase() === 'descartado'"> {{ getEstadoFront(reporte.estado) }}</span>
                                 <i class="bi bi-chevron-right motivo-flecha"></i>
                             </div>
                         </article>
