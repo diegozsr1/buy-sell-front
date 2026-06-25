@@ -19,7 +19,7 @@
     <h1>Artículo reportado</h1>
 
     <div class="tags-resumen tags-desktop">
-        <span class="tag" [class.tag-pendiente]="getEstadoArticuloReportado() === 'Pendiente'" [class.tag-revision]="getEstadoArticuloReportado() === 'En revisión'"> {{ getEstadoArticuloReportado() }}</span>
+        <span class="tag" [class.tag-pendiente]="getEstadoArticuloReportado() === 'Pendiente'" [class.tag-revision]="getEstadoArticuloReportado() === 'En revisión'" [class.tag-gestionado]="getEstadoArticuloReportado() === 'Gestionado'"> {{ getEstadoArticuloReportado() }}</span>
         <span class="tag tag-reportes">{{ reportesArticulo.length }} reporte{{ reportesArticulo.length !== 1 ? 's' : '' }}</span>
     </div>
 

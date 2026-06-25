@@ -99,6 +99,11 @@ a {
     color: #003594;
 }
 
+.tag-gestionado {
+    background: #dcfce7;
+    color: #15803d;
+}
+
 .tag-reportes {
     background: #fee2e2;
     color: #dc2626;
