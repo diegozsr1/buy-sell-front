@@ -32,6 +32,9 @@
   }
   
 }
+.user span{
+  text-transform: capitalize;  
+}
 atom-icon{
     margin-right: 1rem;
 }

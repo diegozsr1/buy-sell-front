@@ -18,7 +18,7 @@
     <div class="contenedor">
         <h1>Valorar</h1>
         <div class="review-user">
-            <app-review-user></app-review-user>
+            <app-review-user [pedido]="pedido"></app-review-user>
         </div>
 
 
@@ -81,14 +81,13 @@
                 </div>
                 }
                 }
-                
+
                 <p>Toca para puntuar</p>
             </div>
         </div>
-
+        <div [class.text-danger]="tipo===false" [class.text-success]="tipo===true">{{mensaje}}</div>
         <div class="card cont-form">
             <div class="card-body">
-                <div [class.text-danger]="tipo===false" [class.text-success]="tipo===true">{{mensaje}}</div>
 
                 <form [formGroup]="miForm" (ngSubmit)="loadData()">
                     <div class="form-group">
@@ -104,7 +103,7 @@
                         }
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+                    <button type="submit" class="btn btn-primary w-100">Enviar valoración</button>
 
                 </form>
             </div>

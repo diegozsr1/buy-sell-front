@@ -17,4 +17,8 @@ export class RatingsService {
   getDetailRatingsByUser(user_id:number): Observable<any> {
     return this.httpClient.get<any>(this.baseUrl + `usuario/get-all/${user_id}`);
   }
+
+  insertRating(body: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl, body, {});
+  }
 }

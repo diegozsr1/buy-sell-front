@@ -4,10 +4,10 @@
         <div class="card-body cont">
             <div class="cuerpo">
                 <atom-icon class="profile" variant="profile-primary-circle"
-                    text_icon="IO" size="1.3rem" />
+                    text_icon="{{pedido.nombre[0] + pedido.apellidos[0]}}" size="1.3rem" />
                 <div class="user">
-                    <h3 class="card-title">Irene O.</h3>
-                    <p>Compra: nombre_artículo. 5 mayo</p>
+                    <h3 class="card-title">{{pedido.nombre + ' ' + pedido.apellidos[0]}}.</h3>
+                    <p>Compra: {{pedido.titulo}}. <span>{{ pedido.fecha_pedido| date:'d MMMM':'':'es' }}</span></p>
                 </div>
             </div>
         </div>
