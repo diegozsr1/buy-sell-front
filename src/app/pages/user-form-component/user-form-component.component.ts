@@ -18,6 +18,9 @@ export class UserFormComponentComponent implements OnInit {
   mensaje = '';
   tipo = false;
 
+  // Previsualización de la foto seleccionada (solo cliente; la subida real depende del backend)
+  fotoPreview: string | null = null;
+
   miForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -50,6 +53,20 @@ export class UserFormComponentComponent implements OnInit {
     }
   }
 
+  // Selección de foto: abre el explorador y previsualiza la imagen elegida (cliente).
+  // TODO: subir el fichero al backend (photos/users) cuando haya conexión.
+  onFotoSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.fotoPreview = reader.result as string;
+      this.cd.detectChanges();
+    };
+    reader.readAsDataURL(file);
+  }
+
   guardarCambios(): void {
     if (!this.miForm.valid) {
       this.miForm.markAllAsTouched();
@@ -57,9 +74,10 @@ export class UserFormComponentComponent implements OnInit {
       this.mensaje = 'Revisa los campos marcados';
       return;
     }
-    // TODO: cablear users-service.update(userID, this.miForm.value)
+    // TODO: cablear users-service.update(userID, this.miForm.value) -> PUT al backend.
+    // Mientras el backend (localhost:3000) no esté levantado, esto no persiste.
     this.tipo = true;
-    this.mensaje = 'Cambios guardados correctamente';
+    this.mensaje = 'Cambios validados correctamente (pendiente de conexión con el backend para guardar)';
     this.cd.detectChanges();
   }
 }

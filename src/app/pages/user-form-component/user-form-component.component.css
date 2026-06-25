@@ -8,7 +8,7 @@ h1 {
   font-size: 2rem;
 }
 
-/* Header / breadcrumb (calcado de edit-article) */
+/* Header / breadcrumb (calcado de edit-article, con segmentos clicables) */
 a {
   text-decoration: none;
   color: inherit;
@@ -50,7 +50,8 @@ a {
     padding-left: 1rem;
     font-weight: bold;
 
-    p {
+    p,
+    a {
       margin: 0;
     }
 
@@ -61,6 +62,9 @@ a {
 
     .panel {
       color: #003594;
+    }
+    .panel:hover {
+      text-decoration: underline;
     }
   }
 }
@@ -101,6 +105,13 @@ label {
   gap: 1.5rem;
 }
 
+.foto-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .foto-info {
   display: flex;
   flex-direction: column;
@@ -120,7 +131,7 @@ label {
   font-size: .85rem;
 }
 
-/* Boton estilo enlace (acciones no-op: subir foto / cambiar contrasena) */
+/* Boton estilo enlace (acciones: subir foto / cambiar contrasena) */
 .link-btn {
   background: none;
   border: none;
@@ -128,6 +139,7 @@ label {
   color: #003594;
   font-weight: bold;
   cursor: pointer;
+  text-align: left;
 }
 
 .link-btn:hover {

@@ -7,9 +7,9 @@
       <div class="alante">></div>
     </div>
     <div class="ruta">
-      <p class="panel">Inicio</p>
+      <a class="panel" [routerLink]="['/home']">Inicio</a>
       <div>></div>
-      <p class="panel">Mi perfil</p>
+      <a class="panel" [routerLink]="['/user/panel/profile']">Mi perfil</a>
       <div>></div>
       <p>Editar perfil</p>
     </div>
@@ -21,10 +21,15 @@
     <!-- Cambiar foto de perfil -->
     <div class="card">
       <div class="card-body foto-perfil">
-        <atom-icon variant="profile-primary-square" [text_icon]="iniciales" size="1.6rem"></atom-icon>
+        @if (fotoPreview) {
+          <img class="foto-avatar" [src]="fotoPreview" alt="Foto de perfil">
+        } @else {
+          <atom-icon variant="profile-primary-square" [text_icon]="iniciales" size="1.6rem"></atom-icon>
+        }
         <div class="foto-info">
           <h5 class="card-title">Cambiar foto de perfil</h5>
-          <button type="button" class="link-btn">Subir nueva foto</button>
+          <button type="button" class="link-btn" (click)="fileInput.click()">Subir nueva foto</button>
+          <input #fileInput type="file" accept="image/*" hidden (change)="onFotoSelected($event)">
         </div>
       </div>
     </div>
