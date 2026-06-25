@@ -2,12 +2,12 @@
 
   <!-- Cabecera de perfil -->
   <div class="profile-header">
-    <atom-icon variant="profile-primary-square" [text_icon]="iniciales" size="1.6rem"></atom-icon>
+    <atom-icon variant="profile-primary-square" [text_icon]="iniciales" size="1.8rem"></atom-icon>
     <div class="profile-header__info">
-      <h1 class="profile-name">{{ nombre }}</h1>
-      <div class="profile-meta">
-        <atom-icon variant="star" size="0.9rem"></atom-icon>
-        <span>{{ ratingAverage }} · {{ ratingTotal }} valoraciones · En Buy&amp;Sell desde {{ desde }}</span>
+      <p class="profile-name">{{ nombreCorto }}</p>
+      <p class="profile-sub">Vendedor · Miembro desde {{ desde }}</p>
+      <div class="profile-badges">
+        <atom-badge variant="Verificado" icon="shield-check"></atom-badge>
       </div>
     </div>
     <a class="profile-edit" [routerLink]="['/user/edit-profile', userId]">Editar perfil</a>
@@ -15,28 +15,48 @@
 
   <!-- Estadísticas -->
   <div class="profile-stats">
-    <molecule-status-card align="left" [status]="ventas.toString()" text="VENTAS"></molecule-status-card>
-    <molecule-status-card align="left" [status]="compras.toString()" text="COMPRAS"></molecule-status-card>
-    <molecule-status-card align="left" [status]="activos.toString()" text="ARTÍCULOS ACTIVOS"></molecule-status-card>
-    <molecule-status-card align="left" [status]="ratingAverage.toString()" text="VALORACIÓN"></molecule-status-card>
+    <molecule-status-card align="left" [status]="publicados.toString()" text="PUBLICADOS"></molecule-status-card>
+    <molecule-status-card align="left" [status]="vendidos.toString()" text="VENDIDOS"></molecule-status-card>
+    <molecule-status-card align="left" [status]="valoracion" text="VALORACIÓN"></molecule-status-card>
   </div>
 
-  <!-- Mis artículos publicados (reutiliza la article-card de Irene) -->
-  <h2 class="section-title">Mis artículos publicados</h2>
-  <div class="contenedor">
-    @for (articulo of articulos; track articulo.id) {
-      <molecule-article-card
-        variant="minimal"
-        [like]="false"
-        [state]="condicion(articulo)"
-        [img]="articulo.url_foto ?? 'imgs/no-photo.jpg'"
-        [price]="precio(articulo)"
-        [name]="articulo.titulo"
-        [location]="ubicacion(articulo)"
-      ></molecule-article-card>
-    } @empty {
-      <p class="empty">Aún no tienes artículos publicados.</p>
-    }
+  <!-- Accesos rápidos (reutiliza management-card del equipo) -->
+  <div class="profile-nav">
+    <molecule-management-card
+      icon="tag"
+      link="/user/panel/sales"
+      title="Ventas"
+      [text]="publicados + ' activos · ' + vendidos + ' vendidos'">
+    </molecule-management-card>
+    <molecule-management-card
+      icon="cube"
+      link="/user/panel/my-purchases"
+      title="Compras"
+      text="5 compras">
+    </molecule-management-card>
+    <molecule-management-card
+      icon="heart"
+      link="/user/panel/favorites"
+      title="Favoritos"
+      text="12 guardados">
+    </molecule-management-card>
+    <!-- TODO: "Mis valoraciones" (US-12) no tiene ruta en el panel todavía; enlace provisional -->
+    <molecule-management-card
+      icon="star"
+      link="/user/panel/profile"
+      title="Valoraciones"
+      [text]="valoracion + ' · 32 valoraciones'">
+    </molecule-management-card>
+  </div>
+
+  <!-- Publicar nuevo artículo -->
+  <div class="profile-cta">
+    <atom-button
+      config_type="primary"
+      icon="plus-lg"
+      label="Publicar nuevo artículo"
+      (click)="publicar()">
+    </atom-button>
   </div>
 
 </section>

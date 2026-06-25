@@ -1,36 +1,36 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Icon } from '../../../atoms/icon/icon';
+import { Badge } from '../../../atoms/badge/badge';
+import { Button } from '../../../atoms/button/button';
 import { StatusCard } from '../../../molecules/cards/status-card/status-card';
-import { ArticleCard } from '../../../molecules/cards/article-card/article-card';
-import { BadgeCondition } from '../../../atoms/badge/badge.types';
+import { ManagementCard } from '../../../molecules/cards/management-card/management-card';
 import { IArticle } from '../../../../interfaces/i-article';
 import { ArticlesService } from '../../../../services/articles-service';
 
 @Component({
   selector: 'app-profile',
-  imports: [RouterLink, Icon, StatusCard, ArticleCard],
+  imports: [RouterLink, Icon, Badge, Button, StatusCard, ManagementCard],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
 export class Profile implements OnInit {
   private articlesService = inject(ArticlesService);
   private cd = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   // Cabecera. TODO: cablear users-service / ratings-service para datos reales.
   userId = 1;
   nombre = 'Manuel García';
   iniciales = 'MG';
-  ratingAverage = 4.9;
-  ratingTotal = 87;
   desde = 2026;
 
-  // Artículos del usuario (datos reales, mismo patrón que la pantalla de Ventas de Irene)
+  // Artículos del usuario (datos reales, mismo patrón que la pantalla de Ventas).
   articulos: IArticle[] = [];
 
-  // Stats. 'activos' se deriva de los artículos reales; el resto: TODO cablear services.
-  ventas = 12;
-  compras = 8;
+  // Stats. 'publicados' se deriva de datos reales; el resto: TODO cablear services.
+  vendidos = 8;
+  valoracion = '4.8';
 
   ngOnInit(): void {
     const usuarioString = localStorage.getItem('usuarioBuy&Sell');
@@ -51,26 +51,23 @@ export class Profile implements OnInit {
     }
   }
 
-  // Nº de artículos activos (publicados), derivado de los datos reales
-  get activos(): number {
+  // Nombre abreviado estilo Figma: "Manuel G."
+  get nombreCorto(): string {
+    const p = this.nombre.trim().split(/\s+/);
+    return p.length > 1 ? `${p[0]} ${p[1][0]}.` : p[0];
+  }
+
+  // Nº de artículos publicados, derivado de los datos reales
+  get publicados(): number {
     return this.articulos.filter((a) => a.estado_articulo_id === 'Publicado').length;
   }
 
-  // Estado de conservación -> badge de la article-card (reutilizada de Irene)
-  condicion(a: IArticle): BadgeCondition {
-    return (a.estado_conservacion_id as BadgeCondition) ?? 'Como nuevo';
-  }
-
-  ubicacion(a: IArticle): string {
-    return a.provincia?.nombre != null ? String(a.provincia.nombre) : '';
-  }
-
-  precio(a: IArticle): number {
-    return Number(a.precio) || 0;
+  publicar(): void {
+    this.router.navigate(['/user/new-product']);
   }
 
   private calcularIniciales(nombre: string): string {
-    const partes = nombre.trim().split(/\s+/);
-    return ((partes[0]?.[0] ?? '') + (partes[1]?.[0] ?? '')).toUpperCase();
+    const p = nombre.trim().split(/\s+/);
+    return ((p[0]?.[0] ?? '') + (p[1]?.[0] ?? '')).toUpperCase();
   }
 }
