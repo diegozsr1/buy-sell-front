@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { IArticle } from '../interfaces/i-article';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,10 @@ export class ArticlesService {
   httpClient = inject(HttpClient);
 
   getArticlesByUser(user_id: number): Observable<any> {
+    return this.httpClient.get<any>(this.baseUrl + `get-all/usuario/${user_id}`);
+  }
+
+  getCountArticlesByUser(user_id: number): Observable<any> {
     return this.httpClient.get<any>(this.baseUrl + `usuario/${user_id}/publicados`);
   }
 
@@ -28,5 +33,14 @@ export class ArticlesService {
 
   updateArticle(id: number, article: any): Observable<any> {
     return this.httpClient.put<any>(this.baseUrl + id, article);
+  }
+
+
+  updateArticleAndCP(id:number,body:any):Observable<any>{
+    return this.httpClient.put(this.baseUrl + `${id}/cp`,body,{})
+  }
+
+  deleteArticle(id: number): Observable<any> {
+    return this.httpClient.delete(this.baseUrl + `${id}`, {});
   }
 }
