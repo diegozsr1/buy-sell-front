@@ -64,3 +64,13 @@ span{
     border:none;
     background-color: transparent;
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .card,.botones{
+        width: 90%;
+    }
+    app-home-bar{
+        display: none;
+    }
+}
