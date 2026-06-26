@@ -8,10 +8,15 @@ import { UsersService } from '../../services/users-service';
 import { IArticle } from '../../interfaces/i-article';
 import { IUsuario } from '../../interfaces/i-usuario';
 import { IRating } from '../../interfaces/i-rating.interface';
+import { UserRatingComment } from "../../components/molecules/user-card/user-rating-comment/user-rating-comment";
+import { ArticlePhotoService } from '../../services/article-photo-service';
+import { IArticlePhoto } from '../../interfaces/i-article-photo.interface';
+import { DatePipe } from '@angular/common';
+import { Badge } from "../../components/atoms/badge/badge";
 
 @Component({
   selector: 'app-review-view',
-  imports: [ Breadcrum],
+  imports: [Breadcrum, UserRatingComment, DatePipe, Badge],
   templateUrl: './review-view.html',
   styleUrl: './review-view.css',
 })
@@ -26,11 +31,13 @@ export class ReviewView {
   ratingService = inject(RatingsService);
   articleService = inject(ArticlesService);
   userService = inject(UsersService);
+  photoService = inject(ArticlePhotoService);
 
   //signals
   review = signal<IRating | null>(null);
   product = signal<IArticle | null>(null);
   seller = signal<IUsuario | null>(null);
+  photos = signal<IArticlePhoto[] | null>(null);
 
   //breadcrumbs
   protected breadcrumbItems = computed(() => [
@@ -86,6 +93,13 @@ export class ReviewView {
 
   async loadProduct(){
     this.product.set( await lastValueFrom(this.articleService.getArticleById(Number(this.review()?.articulos_id))))
+    // img
+
+    try {
+      this.photos.set(await lastValueFrom(this.photoService.getFotosByArticuloId(Number(this.product()?.id))));
+    } catch (error) {
+      this.router.navigate(['/500error']);
+    }
   }
   async loadSeller(){
     this.seller.set(await lastValueFrom(this.userService.getUserById((this.product()!.usuarios_id).toString())))
