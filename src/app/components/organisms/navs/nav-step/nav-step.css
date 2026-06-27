@@ -11,7 +11,7 @@
     align-items: center;
     height: var(--nav-step-height);
 
-    .navigator {
+    .container {
         width: 100%;
         flex:1;
         display: flex;
@@ -24,7 +24,7 @@
             background-color: var(--surface-high);
         }
 
-        a {
+        div {
             position:relative;
             text-decoration: none;
     
