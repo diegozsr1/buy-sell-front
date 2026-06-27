@@ -1,0 +1,20 @@
+<div class="nav-step">
+    <nav class="navigator">
+        @for (step of steps(); track $index; let last = $last) {
+            <div class="step d-flex flex-column" > 
+                
+                <a [routerLink]="[]" routerLinkActive="active" 
+            [routerLinkActiveOptions]="{ exact: true }" 
+            [queryParams]="{step: step.query_param}">
+                <p class="name">{{ step.name }}</p>
+                <p class="label">{{ step.label }}</p>
+            </a> 
+            
+        </div>
+        @if(!last){
+            <div class="separator"></div>
+        }
+        
+    }
+    </nav>
+</div>
