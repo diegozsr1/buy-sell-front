@@ -6,6 +6,7 @@ import { FavoriteUser } from '../../../molecules/cards/favorite-user/favorite-us
 import { FavoriteArticle } from '../../../molecules/cards/favorite-article/favorite-article';
 import { FavoritesService } from '../../../../services/favorites-service';
 import { IFavorite } from '../../../../interfaces/i-favorite';
+import { IFavoriteUser } from '../../../../interfaces/i-favorite-user';
 
 @Component({
   selector: 'app-favorites',
@@ -20,6 +21,7 @@ export class Favorites {
   user!:IUsuario;
   favoritesService = inject(FavoritesService);
   favoritos: IFavorite[] = [];
+  usuarios:IFavoriteUser[]=[];
 
   constructor(private router: Router,private cd: ChangeDetectorRef) {}
 
@@ -40,12 +42,25 @@ export class Favorites {
           console.error('Error cargando artículo:', error);
         }
       });
+
+      this.favoritesService.getAllFavoritesUsersByUser(Number(this.user.id)).subscribe({
+        next: (data) => {
+          this.usuarios = data;
+         
+          console.log(this.usuarios);
+
+          this.cd.detectChanges();
+        },
+        error: (error) => {
+          console.error('Error cargando artículo:', error);
+        }
+      });
     }
   }
   irADetalleUsuario(id:number):void{
     this.router.navigate(['/usuario/detalle',id]);
   }
   irADetalleArticulo(id:number):void{
-    this.router.navigate(['/articulo/detalle',id]);
+    this.router.navigate(['/product',id]);
   }
 }
