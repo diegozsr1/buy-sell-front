@@ -1,10 +1,12 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { ReportsService } from '../../../../services/reports-service';
+import { StatusCard } from '../../../molecules/cards/status-card/status-card';
+import { ManagementCard } from '../../../molecules/cards/management-card/management-card';
 
 @Component({
   selector: 'app-moderator-panel-component',
-  imports: [RouterLink],
+  imports: [RouterLink, StatusCard, ManagementCard],
   templateUrl: './moderator-panel-component.component.html',
   styleUrl: './moderator-panel-component.component.css',
 })
