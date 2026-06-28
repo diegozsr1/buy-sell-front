@@ -27,9 +27,6 @@ import { Statistics } from './components/organisms/admin/statistics/statistics';
 import { Admin } from './pages/admin/admin';
 import { HomeHeroComponent } from './pages/home-hero-component/home-hero-component';
 import { Reports } from './components/organisms/admin/reports/reports';
-import { Historic } from './components/organisms/admin/historic/historic';
-import { Ratings } from './components/organisms/admin/ratings/ratings';
-import { Settings } from './components/organisms/admin/settings/settings';
 import { DetalleUsuario } from './components/organisms/admin/detalle-usuario/detalle-usuario';
 import { CreateCategory } from './components/organisms/admin/categories/create-category/create-category';
 import { EditCategory } from './components/organisms/admin/categories/edit-category/edit-category';
@@ -48,8 +45,13 @@ import { ProductReportPage } from './pages/reports/product-report-page/product-r
 import { UserReportPage } from './pages/reports/user-report-page/user-report-page';
 import { SellerProfile } from './pages/seller-profile/seller-profile';
 import { ProductPublished } from './pages/product-published/product-published';
+<<<<<<< HEAD
 import { ReviewView } from './pages/review-view/review-view';
 import { MyReviews } from './pages/my-reviews/my-reviews';
+=======
+import { AdminModeratorProfileComponent } from './components/organisms/moderator/admin-moderator-profile/admin-moderator-profile.component';
+import { ReportsDetailComponent } from './components/organisms/admin/reports/reports-detail/reports-detail.component';
+>>>>>>> feature/ajustes_mod_admin
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -132,7 +134,8 @@ export const routes: Routes = [
                     { path: 'incidents', component: IncidentsComponentComponent },
                     { path: 'incident/:articuloId', component: IncidentViewComponentComponent},
                     { path: 'incident/:articuloId/:reporteId', component: IncidentReportDetailComponent},
-                    { path: 'historic', component: HistoricModeratorComponentComponent}
+                    { path: 'historic', component: HistoricModeratorComponentComponent},
+                    { path: 'profile', component: AdminModeratorProfileComponent }
                 ]
             }
         ]
@@ -143,54 +146,18 @@ export const routes: Routes = [
     {
         path: 'admin', component: AdminComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Administrador']}, children: [
             { path: '', pathMatch: 'full', redirectTo: 'panel' },
-            {
-                path: 'panel', component: Admin,
-                children: [
+            { path: 'panel', component: Admin, children: [
                     { path: '', pathMatch: 'full', redirectTo: 'main' },
-                    {
-                        path: 'main',
-                        component: Panel
-                    },
-                    {
-                        path: 'users',
-                        component: UsuariosRoles
-                    },
-                    {
-                        path: 'user/:id',
-                        component: DetalleUsuario
-                    },
-                    {
-                        path: 'categories',
-                        component: Categories
-                    },
-                    {
-                        path: 'categories/create',
-                        component: CreateCategory
-                    },
-                    {
-                        path: 'categories/edit/:id',
-                        component: EditCategory
-                    },
-                    {
-                        path: 'statistics',
-                        component: Statistics
-                    },
-                    {
-                        path: 'reports',
-                        component: Reports
-                    },
-                    {
-                        path: 'historic',
-                        component: Historic
-                    },
-                    {
-                        path: 'ratings',
-                        component: Ratings
-                    },
-                    {
-                        path: 'settings',
-                        component: Settings
-                    }
+                    { path: 'main', component: Panel },
+                    { path: 'users', component: UsuariosRoles },
+                    { path: 'user/:id', component: DetalleUsuario },
+                    { path: 'categories', component: Categories },
+                    { path: 'categories/create', component: CreateCategory },
+                    { path: 'categories/edit/:id', component: EditCategory },
+                    { path: 'statistics', component: Statistics },
+                    { path: 'reports', component: Reports },
+                    { path: 'reports/:articuloId', component: ReportsDetailComponent },
+                    { path: 'profile', component: AdminModeratorProfileComponent }
                 ]
             }
         ]
