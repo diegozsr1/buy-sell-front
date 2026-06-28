@@ -48,6 +48,7 @@ import { ProductReportPage } from './pages/reports/product-report-page/product-r
 import { UserReportPage } from './pages/reports/user-report-page/user-report-page';
 import { SellerProfile } from './pages/seller-profile/seller-profile';
 import { ProductPublished } from './pages/product-published/product-published';
+import { ModeratorProfileComponent } from './components/organisms/moderator/moderator-profile/moderator-profile.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -122,7 +123,8 @@ export const routes: Routes = [
                     { path: 'incidents', component: IncidentsComponentComponent },
                     { path: 'incident/:articuloId', component: IncidentViewComponentComponent},
                     { path: 'incident/:articuloId/:reporteId', component: IncidentReportDetailComponent},
-                    { path: 'historic', component: HistoricModeratorComponentComponent}
+                    { path: 'historic', component: HistoricModeratorComponentComponent},
+                    { path: 'profile', component: ModeratorProfileComponent }
                 ]
             }
         ]

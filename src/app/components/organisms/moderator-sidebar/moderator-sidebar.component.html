@@ -11,17 +11,21 @@
 
     <nav class="nav-sidebar">
         <a [routerLink]="['/moderator/panel/main']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-kanban"></i>
             <p>Panel</p>
         </a>
         <a [routerLink]="['/moderator/panel/incidents']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
             <i class="bi bi-flag"></i>
             <p>Reportes pendientes</p>
         </a>
-        <a class="historial" [routerLink]="['/moderator/panel/historic']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <a [routerLink]="['/moderator/panel/historic']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
             <i class="bi bi-clock"></i>
             <p>Historial de reportes</p>
         </a>
+        <a [routerLink]="['/moderator/panel/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <i class="bi bi-person"></i>
+            <p>Mi perfil</p>
+        </a>        
     </nav>
 
     <nav class="cerrar-sesion">
