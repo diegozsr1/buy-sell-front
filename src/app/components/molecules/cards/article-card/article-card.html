@@ -1,12 +1,12 @@
-<div class="article-card">
+<div class="article-card" [class.owner]="variant() === 'owner'">
     <div class="image">
         <img [src]="img()" alt="">
-        <atom-badge [variant]="state()" class="article-badge desktop"/>
+        @if(variant() !== 'owner'){<atom-badge [variant]="state()" class="article-badge desktop"/>}
         @if(like()){
             <atom-button-icon variant="like" size="1rem" class="article-like" (buttonIonClick)="selectArticle($event)"/>
         }
     </div>
-    <atom-badge [variant]="state()" class="article-badge mobile"/>
+    @if(variant() !== 'owner'){<atom-badge [variant]="state()" class="article-badge mobile"/>}
     @if(variant() === 'minimal'){
     <p class="price">{{price()}} €</p>
     <h2 >{{name()}}</h2>
@@ -52,6 +52,18 @@
     <h2 >{{name()}}</h2>
     <p class="price">{{price()}} €</p>
     <atom-button class="btn-outstanding" label="Comprar ahora" icon="cart"/>
+    }
+        @else if (variant() === 'owner') {
+    <div class="owner-body">
+        <div class="owner-status" [class.publicado]="estado() === 'Publicado'" [class.revision]="estado() === 'En_revision'" [class.vendido]="estado() === 'Vendido'" [class.generico]="estado() !== 'Publicado' && estado() !== 'En_revision' && estado() !== 'Vendido'">
+            @if(estado() === 'Publicado'){ ACTIVO }
+            @else if(estado() === 'En_revision'){ EN REVISIÓN }
+            @else if(estado() === 'Vendido'){ VENDIDO }
+            @else { {{estado()}} }
+        </div>
+        <p class="owner-price">{{price()}} €</p>
+        <h3 class="owner-name">{{name()}}</h3>
+    </div>
     }
 </div>
 

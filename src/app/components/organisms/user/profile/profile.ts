@@ -3,9 +3,11 @@ import { RouterLink } from '@angular/router';
 import { Icon } from '../../../atoms/icon/icon';
 import { StatusCard } from '../../../molecules/cards/status-card/status-card';
 import { ArticleCard } from '../../../molecules/cards/article-card/article-card';
-import { BadgeCondition } from '../../../atoms/badge/badge.types';
 import { IArticle } from '../../../../interfaces/i-article';
 import { ArticlesService } from '../../../../services/articles-service';
+import { UsersService } from '../../../../services/users-service';
+import { RatingsService } from '../../../../services/ratings-service';
+import { OrdersService } from '../../../../services/orders-service';
 
 @Component({
   selector: 'app-profile',
@@ -15,54 +17,94 @@ import { ArticlesService } from '../../../../services/articles-service';
 })
 export class Profile implements OnInit {
   private articlesService = inject(ArticlesService);
+  private usersService = inject(UsersService);
+  private ratingsService = inject(RatingsService);
+  private ordersService = inject(OrdersService);
   private cd = inject(ChangeDetectorRef);
 
-  // Cabecera. TODO: cablear users-service / ratings-service para datos reales.
+  // Cabecera (datos reales del backend; por defecto hasta que respondan los servicios)
   userId = 1;
-  nombre = 'Manuel García';
-  iniciales = 'MG';
-  ratingAverage = 4.9;
-  ratingTotal = 87;
+  nombre = '';
+  iniciales = '';
+  ratingAverage = 0;
+  ratingTotal = 0;
   desde = 2026;
 
-  // Artículos del usuario (datos reales, mismo patrón que la pantalla de Ventas de Irene)
+  // Articulos del usuario (datos reales, mismo patron que la pantalla de Ventas de Irene)
   articulos: IArticle[] = [];
 
-  // Stats. 'activos' se deriva de los artículos reales; el resto: TODO cablear services.
-  ventas = 12;
-  compras = 8;
+  // Stats reales (derivadas de los endpoints del equipo)
+  ventas = 0;
+  compras = 0;
+  activos = 0;
 
   ngOnInit(): void {
     const usuarioString = localStorage.getItem('usuarioBuy&Sell');
-    if (usuarioString) {
-      const user = JSON.parse(usuarioString);
-      this.userId = Number(user.id) || 1;
-      if (user?.username) {
-        this.nombre = user.username;
-        this.iniciales = this.calcularIniciales(user.username);
-      }
-      this.articlesService.getArticlesByUser(this.userId).subscribe({
-        next: (data) => {
-          this.articulos = data ?? [];
-          this.cd.detectChanges();
-        },
-        error: (err) => console.error('Error cargando artículos:', err),
-      });
+    if (!usuarioString) {
+      return;
     }
-  }
+    const user = JSON.parse(usuarioString);
+    this.userId = Number(user.id) || 1;
 
-  // Nº de artículos activos (publicados), derivado de los datos reales
-  get activos(): number {
-    return this.articulos.filter((a) => a.estado_articulo_id === 'Publicado').length;
-  }
+    // Cabecera: nombre completo, iniciales y anio de alta (GET /usuarios/:id)
+    this.usersService.getUserById(String(this.userId)).subscribe({
+      next: (u) => {
+        const nombreCompleto = [u?.nombre, u?.apellidos].filter(Boolean).join(' ').trim();
+        this.nombre = nombreCompleto || u?.username || 'Usuario';
+        this.iniciales = this.calcularIniciales(this.nombre);
+        if (u?.created_at) {
+          this.desde = new Date(u.created_at).getFullYear();
+        }
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error('Error cargando usuario:', err),
+    });
 
-  // Estado de conservación -> badge de la article-card (reutilizada de Irene)
-  condicion(a: IArticle): BadgeCondition {
-    return (a.estado_conservacion_id as BadgeCondition) ?? 'Como nuevo';
-  }
+    // Valoracion media + total recibidas (GET /valoraciones/usuario/:id/promedio)
+    this.ratingsService.getRatingsByUser(this.userId).subscribe({
+      next: (r) => {
+        this.ratingAverage = Number(r?.puntuacion_media ?? 0);
+        this.ratingTotal = Number(r?.total_valoraciones ?? 0);
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error('Error cargando valoraciones:', err),
+    });
 
-  ubicacion(a: IArticle): string {
-    return a.provincia?.nombre != null ? String(a.provincia.nombre) : '';
+    // Ventas (GET /pedidos/usuario/:id/ventas -> total_ventas)
+    this.ordersService.getOrdersByUser(this.userId).subscribe({
+      next: (v) => {
+        this.ventas = Number(v?.total_ventas ?? 0);
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error('Error cargando ventas:', err),
+    });
+
+    // Compras (GET /pedidos/usuario/:id -> array de pedidos como comprador)
+    this.ordersService.getPurchasesByUser(this.userId).subscribe({
+      next: (compras) => {
+        this.compras = Array.isArray(compras) ? compras.length : 0;
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error('Error cargando compras:', err),
+    });
+
+    // Articulos activos / publicados (GET /articulos/usuario/:id/publicados -> total_publicados)
+    this.articlesService.getCountArticlesByUser(this.userId).subscribe({
+      next: (a) => {
+        this.activos = Number(a?.total_publicados ?? 0);
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error('Error cargando publicados:', err),
+    });
+
+    // Rejilla "Mis articulos publicados" (GET /articulos/get-all/usuario/:id)
+    this.articlesService.getArticlesByUser(this.userId).subscribe({
+      next: (data) => {
+        this.articulos = data ?? [];
+        this.cd.detectChanges();
+      },
+      error: (err) => console.error('Error cargando articulos:', err),
+    });
   }
 
   precio(a: IArticle): number {

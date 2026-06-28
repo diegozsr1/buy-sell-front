@@ -13,12 +13,20 @@
     <a class="profile-edit" [routerLink]="['/user/edit-profile', userId]">Editar perfil</a>
   </div>
 
-  <!-- Estadísticas -->
+  <!-- Estadísticas (enlazan a su secciÓn + hover) -->
   <div class="profile-stats">
-    <molecule-status-card align="left" [status]="ventas.toString()" text="VENTAS"></molecule-status-card>
-    <molecule-status-card align="left" [status]="compras.toString()" text="COMPRAS"></molecule-status-card>
-    <molecule-status-card align="left" [status]="activos.toString()" text="ARTÍCULOS ACTIVOS"></molecule-status-card>
-    <molecule-status-card align="left" [status]="ratingAverage.toString()" text="VALORACIÓN"></molecule-status-card>
+    <a class="stat-card-link" [routerLink]="['/user/panel/sales']">
+      <molecule-status-card align="left" [status]="ventas.toString()" text="VENTAS"></molecule-status-card>
+    </a>
+    <a class="stat-card-link" [routerLink]="['/user/panel/my-purchases']">
+      <molecule-status-card align="left" [status]="compras.toString()" text="COMPRAS"></molecule-status-card>
+    </a>
+    <a class="stat-card-link" [routerLink]="['/user/panel/sales']">
+      <molecule-status-card align="left" [status]="activos.toString()" text="ARTíCULOS ACTIVOS"></molecule-status-card>
+    </a>
+    <div class="stat-card-link stat-card-static">
+      <molecule-status-card align="left" [status]="ratingAverage.toString()" text="VALORACIONES"></molecule-status-card>
+    </div>
   </div>
 
   <!-- Mis artículos publicados (reutiliza la article-card de Irene) -->
@@ -26,13 +34,12 @@
   <div class="contenedor">
     @for (articulo of articulos; track articulo.id) {
       <molecule-article-card
-        variant="minimal"
+        variant="owner"
         [like]="false"
-        [state]="condicion(articulo)"
+        [estado]="articulo.estado_articulo_id"
         [img]="articulo.url_foto ?? 'imgs/no-photo.jpg'"
         [price]="precio(articulo)"
         [name]="articulo.titulo"
-        [location]="ubicacion(articulo)"
       ></molecule-article-card>
     } @empty {
       <p class="empty">Aún no tienes artículos publicados.</p>
