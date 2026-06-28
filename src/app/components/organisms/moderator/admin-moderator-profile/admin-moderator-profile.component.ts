@@ -7,15 +7,16 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-moderator-profile',
   imports: [RouterLink, FormsModule],
-  templateUrl: './moderator-profile.component.html',
-  styleUrl: './moderator-profile.component.css',
+  templateUrl: './admin-moderator-profile.component.html',
+  styleUrl: './admin-moderator-profile.component.css',
 })
-export class ModeratorProfileComponent {
+export class AdminModeratorProfileComponent {
   usersService = inject(UsersService);
 
   user: any = {};
   form: any = {};
   formOriginal: any = {};
+  rutaPanel: string[] = [];
 
   nuevaPassword: string = '';
   editando = false;
@@ -35,6 +36,8 @@ export class ModeratorProfileComponent {
             ...data,
             iniciales: usuarioLocal.iniciales
           };
+
+          this.rutaPanel = this.user.roles_id === 'Moderador' ? ['/moderator/panel/main'] : ['/admin/panel/main'];
 
           this.form = {
             nombre: data.nombre,

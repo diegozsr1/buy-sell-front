@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <molecule-header-profile username="{{user.username}}" initials="{{user.iniciales}}"></molecule-header-profile>
+    <molecule-header-profile username="{{user.username}}" initials="{{user.iniciales}}" role="{{user.rol}}"></molecule-header-profile>
     @if(role() === 'user'){
         <nav class="nav-sidebar">
             <a [routerLink]="['/user/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
@@ -91,12 +91,4 @@
             <p>Cerrar sesión</p>
         </button>
     </nav>
-
-   
-   
-
-   
-
-    
-
 </div>

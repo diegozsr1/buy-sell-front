@@ -29,7 +29,6 @@ import { HomeHeroComponent } from './pages/home-hero-component/home-hero-compone
 import { Reports } from './components/organisms/admin/reports/reports';
 import { Historic } from './components/organisms/admin/historic/historic';
 import { Ratings } from './components/organisms/admin/ratings/ratings';
-import { Settings } from './components/organisms/admin/settings/settings';
 import { DetalleUsuario } from './components/organisms/admin/detalle-usuario/detalle-usuario';
 import { CreateCategory } from './components/organisms/admin/categories/create-category/create-category';
 import { EditCategory } from './components/organisms/admin/categories/edit-category/edit-category';
@@ -48,7 +47,7 @@ import { ProductReportPage } from './pages/reports/product-report-page/product-r
 import { UserReportPage } from './pages/reports/user-report-page/user-report-page';
 import { SellerProfile } from './pages/seller-profile/seller-profile';
 import { ProductPublished } from './pages/product-published/product-published';
-import { ModeratorProfileComponent } from './components/organisms/moderator/moderator-profile/moderator-profile.component';
+import { AdminModeratorProfileComponent } from './components/organisms/moderator/admin-moderator-profile/admin-moderator-profile.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -124,7 +123,7 @@ export const routes: Routes = [
                     { path: 'incident/:articuloId', component: IncidentViewComponentComponent},
                     { path: 'incident/:articuloId/:reporteId', component: IncidentReportDetailComponent},
                     { path: 'historic', component: HistoricModeratorComponentComponent},
-                    { path: 'profile', component: ModeratorProfileComponent }
+                    { path: 'profile', component: AdminModeratorProfileComponent }
                 ]
             }
         ]
@@ -179,10 +178,7 @@ export const routes: Routes = [
                         path: 'ratings',
                         component: Ratings
                     },
-                    {
-                        path: 'settings',
-                        component: Settings
-                    }
+                    { path: 'profile', component: AdminModeratorProfileComponent }
                 ]
             }
         ]

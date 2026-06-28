@@ -6,6 +6,10 @@
             @if(role() === "user") {
                 <atom-icon variant="star" size="1rem"></atom-icon>
                 <p>{{rating_average()}} <span>({{rating_total()}})</span> </p>
+            } @else {
+                <div class="rol">
+                    <p>{{ role() }}</p>
+                </div>
             }
         </div>
     </div>
