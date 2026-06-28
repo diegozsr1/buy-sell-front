@@ -15,58 +15,6 @@ a {
     }
 }
 
-/* Header */
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-
-    .navegador {
-        display: flex;
-    }
-
-    .atras,
-    .alante {
-        display: flex;
-        border: 1px solid #dbe1ea;
-        border-radius: 10px;
-        width: 2rem;
-        height: 2rem;
-        margin-right: .5rem;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        background: #fff;
-    }
-
-    .alante {
-        color: #9ca3af;
-        background-color: #f8f9ff;
-    }
-
-    .ruta {
-        display: flex;
-        align-items: center;
-        border-left: 1px solid #dbe1ea;
-        margin-left: 1rem;
-        padding-left: 1rem;
-        font-weight: bold;
-
-        p {
-            margin: 0;
-        }
-
-        div {
-            margin: 0 .5rem;
-            color: #9ca3af;
-        }
-
-        .panel {
-            color: #003594;
-        }
-    }
-}
-
 p.descripcion {
     color: gray;
 }
@@ -140,6 +88,31 @@ p.descripcion {
     display: none;
 }
 
+/*Paginación*/
+.paginacion{
+    display:flex;
+    justify-content:center;
+    gap:.5rem;
+    margin-top:2rem;
+}
+
+.paginacion button{
+    padding:.5rem 1rem;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.paginacion button.activa{
+    background:#003594;
+    color:white;
+}
+
+.paginacion button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+/************/
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -155,11 +128,7 @@ p.descripcion {
             font-weight: 700;
         }
     }
-
-    .header {
-        display: none;
-    }
-
+    
     .heading {
         display: contents;
     }
@@ -243,6 +212,11 @@ p.descripcion {
         align-items: center;
         justify-content: center;
         font-size: 1.25rem;
+        img {
+            width: 1.4rem;
+            height: 1.4rem;
+            object-fit: contain;
+        }
     }
 
     .info-categoria {

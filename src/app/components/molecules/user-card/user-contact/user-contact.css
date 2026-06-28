@@ -1,0 +1,48 @@
+.report {
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    gap:1rem;
+    text-decoration: none;
+    outline: none;
+    color: var(--err);
+    padding-top:1rem;
+}
+
+
+.year {
+    color: var(--text-tertiary);
+}
+
+
+molecule-user-card {
+    --card-direction: row;
+    --card-justify: flex-start;
+    --card-align: center;
+    --card-gap: 1.5rem;
+}
+
+.contact {
+    margin-left:auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    molecule-user-card {
+        --card-direction: column;
+        --card-justify: center;
+        --card-align: center;
+        --card-text-align: center;
+        --card-gap: 1rem;
+    }
+
+    .contact {
+        flex:1;
+        width:100%;
+        margin:0;
+    }
+
+    .report {
+        justify-content: center;
+    }
+}

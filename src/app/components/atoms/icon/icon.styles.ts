@@ -14,7 +14,7 @@ type IconStylesMap = Record<IconVariant, HtmlElements>;
 
 /** Component Style*/
 const STYLE_SHAPE_CIRCLE = `d-flex align-items-center justify-content-center rounded-circle`;
-const STYLE_SHAPE_SQUARE = `d-flex align-items-center justify-content-center rounded-5`;
+const STYLE_SHAPE_SQUARE = `d-flex align-items-center justify-content-center rounded-2`;
 
 export const STYLES: IconStylesMap= {
     'error-403': {
@@ -66,7 +66,7 @@ export const STYLES: IconStylesMap= {
     },
     graph: { 
         container: STYLE_SHAPE_SQUARE,
-        icon: 'bi bi-bar-chart-line-fill',                   
+        icon: 'bi bi-bar-chart-line',                   
     },
     tag: { 
         container: STYLE_SHAPE_SQUARE,
@@ -88,6 +88,9 @@ export const STYLES: IconStylesMap= {
         icon: 'bi bi-heart-fill',                   
     },
     profile: { 
+        container: STYLE_SHAPE_CIRCLE                 
+    },
+    'profile-square': { 
         container: STYLE_SHAPE_CIRCLE                 
     },
     'profile-primary-circle': { 

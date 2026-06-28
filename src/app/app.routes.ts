@@ -6,11 +6,11 @@ import { UserFormComponentComponent } from './pages/user-form-component/user-for
 import { ProductViewComponentComponent } from './pages/product-view-component/product-view-component.component';
 import { ProductFormComponentComponent } from './pages/product-form-component/product-form-component.component';
 import { ProductCheckoutComponentComponent } from './pages/product-checkout-component/product-checkout-component.component';
-import { UserProfileComponentComponent } from './pages/user-profile-component/user-profile-component.component';
 import { FavoritesComponentComponent } from './pages/favorites-component/favorites-component.component';
+import { UserMyPurchasesComponentComponent } from './pages/user-my-purchases-component/user-my-purchases-component.component';
 import { MessagesComponentComponent } from './pages/messages-component/messages-component.component';
-import { ModeratorPanelComponentComponent } from './pages/moderator-panel-component/moderator-panel-component.component';
-import { IncidentViewComponentComponent } from './pages/incident-view-component/incident-view-component.component';
+import { ModeratorPanelComponentComponent } from './components/organisms/moderator/moderator-panel-component/moderator-panel-component.component';
+import { IncidentViewComponentComponent } from './components/organisms/moderator/incidents-component/incident-view-component/incident-view-component.component';
 import { UserComponentComponent } from './pages/user-component/user-component.component';
 import { ModeratorComponentComponent } from './pages/moderator-component/moderator-component.component';
 import { AdminComponentComponent } from './pages/admin-component/admin-component.component';
@@ -33,18 +33,33 @@ import { Settings } from './components/organisms/admin/settings/settings';
 import { DetalleUsuario } from './components/organisms/admin/detalle-usuario/detalle-usuario';
 import { CreateCategory } from './components/organisms/admin/categories/create-category/create-category';
 import { EditCategory } from './components/organisms/admin/categories/edit-category/edit-category';
-import { IncidentsComponentComponent } from './pages/incidents-component/incidents-component.component';
-import { HistoricModeratorComponentComponent } from './pages/historic-moderator-component/historic-moderator-component.component';
+import { UserPanel } from './pages/user-panel/user-panel';
+import { Profile } from './components/organisms/user/profile/profile';
+import { Favorites } from './components/organisms/user/favorites/favorites';
+import { IncidentsComponentComponent } from './components/organisms/moderator/incidents-component/incidents-component.component';
+import { HistoricModeratorComponentComponent } from './components/organisms/moderator/historic-moderator-component/historic-moderator-component.component';
+import { ModeratorComponent } from './pages/moderator/moderator.component';
+import { IncidentReportDetailComponent } from './components/organisms/moderator/incidents-component/incident-report-detail-component/incident-report-detail-component';
+import { Sales } from './components/organisms/user/sales/sales';
+import { EditArticle } from './components/organisms/user/edit-article/edit-article';
+import { ExploreComponent } from './pages/explore-component/explore-component';
+import { WriteReview } from './components/organisms/user/write-review/write-review';
+import { ProductReportPage } from './pages/reports/product-report-page/product-report-page';
+import { UserReportPage } from './pages/reports/user-report-page/user-report-page';
+import { SellerProfile } from './pages/seller-profile/seller-profile';
+import { ProductPublished } from './pages/product-published/product-published';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home' },
     { path: 'home', component: HomeComponentComponent },
     { path: 'home-hero', component: HomeHeroComponent },
+    { path: 'explore', component: ExploreComponent },
     { path: 'login', component: LoginComponentComponent },
     { path: 'register', component: RegisterComponentComponent },
     { path: 'product/:productID', component: ProductViewComponentComponent },
+    { path: 'product/published/:productID', component: ProductPublished },
 
-    // // Rutas Home: Usuario Normal. Falta implemetar el Guard y hacer sus hijos
+    // // Rutas Home: Usuario Normal. 
     {
         path: 'user', component: UserComponentComponent, canActivate: [authGuard], children: [
             { path: '', pathMatch: 'full', redirectTo: 'profile' },
@@ -52,28 +67,68 @@ export const routes: Routes = [
             { path: 'product/:productID', component: ProductViewComponentComponent },
             { path: 'product/edit/:productID', component: ProductFormComponentComponent },
             { path: 'product/checkout/:productID', component: ProductCheckoutComponentComponent },
-            { path: 'profile', component: UserProfileComponentComponent },
+            { path: 'panel', component: UserPanel,
+                children: [
+                    { path: '', pathMatch: 'full', redirectTo: 'profile' },
+                    {
+                        path: 'profile',
+                        component: Profile
+                    },
+                    {
+                        path: 'favorites',
+                        component: Favorites
+                    },
+                    {
+                        path: 'sales',
+                        component: Sales
+                    },
+                    {
+                        path: 'my-purchases',
+                        component: UserMyPurchasesComponentComponent
+                    },
+                    {
+                        path: 'my-purchases/write-review/:id',
+                        component: WriteReview
+                    },
+                    {
+                        path: 'article/edit/:id',
+                        component: EditArticle
+                    }
+                ]
+             },
+            /*{ path: 'profile/:userID', component: UserProfileComponentComponent }, */
+
             { path: 'edit-profile/:userID', component: UserFormComponentComponent },
             { path: 'favorites', component: FavoritesComponentComponent },
+            /*{ path: 'my-purchases', component: UserMyPurchasesComponentComponent },*/
+            //reportes
+            {path: 'report/product/:productID', component: ProductReportPage},
+            {path: 'report/user/:userID', component: UserReportPage},
             // Ruta Mensajeria
             { path: 'messages', component: MessagesComponentComponent },
-            { path: 'messages/:chatID', component: ChatComponentComponent },
+            { path: 'messages/:userID', component: ChatComponentComponent },
+            { path: 'sellers/:userID', component: SellerProfile },
         ]
     },
 
-    // // Rutas Moderator Panel: Usuario Moderador. Falta implemetar el Guard y hacer sus hijos
+    // // Rutas Moderator Panel: Usuario Moderador.
 
     {
         path: 'moderator', component: ModeratorComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Moderador']}, children: [
             { path: '', pathMatch: 'full', redirectTo: 'panel' },
-            { path: 'panel', component: ModeratorPanelComponentComponent },
-            { path: 'incidents', component: IncidentsComponentComponent},
-            { path: 'incident/:incidentID', component: IncidentViewComponentComponent },
-            { path: 'historic', component: HistoricModeratorComponentComponent}
+            { path: 'panel', component: ModeratorComponent, children: [
+                    { path: '', pathMatch: 'full', redirectTo: 'main' },
+                    { path: 'main', component: ModeratorPanelComponentComponent },
+                    { path: 'incidents', component: IncidentsComponentComponent },
+                    { path: 'incident/:articuloId', component: IncidentViewComponentComponent},
+                    { path: 'incident/:articuloId/:reporteId', component: IncidentReportDetailComponent},
+                    { path: 'historic', component: HistoricModeratorComponentComponent}
+                ]
+            }
         ]
     },
 
-    // // Rutas Admin Panel: Usuario Administrador. Falta implemetar el Guard
+    // // Rutas Admin Panel: Usuario Administrador. 
 
     {
         path: 'admin', component: AdminComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Administrador']}, children: [
@@ -130,7 +185,8 @@ export const routes: Routes = [
             }
         ]
     },
-    { path: '**', component: C404componentComponent },
+    //errors
     { path: '403error', component: C403componentComponent },
-    { path: '500error', component: C500componentComponent }
+    { path: '500error', component: C500componentComponent },
+    { path: '**', component: C404componentComponent }
 ];
