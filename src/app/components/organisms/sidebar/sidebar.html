@@ -73,17 +73,18 @@
             </a>
             <a [routerLink]="['/admin/panel/reports']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                 <i class="bi bi-flag"></i>
-                <p>Reportes pendientes</p>
-            </a>
-            <a [routerLink]="['/admin/panel/historic']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                <i class="bi bi-clock"></i>
-                <p>Historial</p>
+                <p>Reportes</p>
             </a>
             <a [routerLink]="['/admin/panel/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                 <i class="bi bi-person"></i>
                 <p>Mi perfil</p>
-            </a>            
+            </a>  
         </nav>
+        <div class="moderator-access">
+            <a [routerLink]="['/moderator/panel/main']" class="btn-moderator-panel">
+                Panel del moderador
+            </a>
+        </div>          
     }
     <nav class="cerrar-sesion">
         <button type="button" (click)="logout()">
