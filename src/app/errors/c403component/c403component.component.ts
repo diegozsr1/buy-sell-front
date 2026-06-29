@@ -11,6 +11,26 @@ import { Router } from '@angular/router';
 export class C403componentComponent {
   router = inject(Router);
   gotoHome() {
-    this.router.navigate(['/']);
+    const raw = localStorage.getItem('usuarioBuy&Sell');
+    if (!raw) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    const user = JSON.parse(raw);
+
+    if (user.rol === 'Administrador') {
+
+      this.router.navigate(['/admin/panel/main']);
+
+    } else if (user.rol === 'Moderador') {
+      
+      this.router.navigate(['/moderator/panel/main']);
+
+    } else {
+
+      this.router.navigate(['/']);
+      
+    }
   }
 }

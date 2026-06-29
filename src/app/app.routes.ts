@@ -121,7 +121,7 @@ export const routes: Routes = [
     // // Rutas Moderator Panel: Usuario Moderador.
 
     {
-        path: 'moderator', component: ModeratorComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Moderador']}, children: [
+        path: 'moderator', component: ModeratorComponentComponent, canActivate: [authGuard, roleGuard], data: {roles: ['Moderador', 'Administrador']}, children: [
             { path: '', pathMatch: 'full', redirectTo: 'panel' },
             { path: 'panel', component: ModeratorComponent, children: [
                     { path: '', pathMatch: 'full', redirectTo: 'main' },
