@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Icon } from '../../components/atoms/icon/icon';
 import { UsersService } from '../../services/users-service';
 
@@ -14,6 +14,7 @@ export class UserFormComponentComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private cd = inject(ChangeDetectorRef);
   private usersService = inject(UsersService);
+  private router = inject(Router);
 
   userID = '';
   iniciales = 'MG';
@@ -92,10 +93,36 @@ export class UserFormComponentComponent implements OnInit {
       this.mensaje = 'Revisa los campos marcados';
       return;
     }
-    // TODO: cablear users-service.update(userID, this.miForm.value) -> PUT al backend.
-    // Mientras el backend (localhost:3000) no esté levantado, esto no persiste.
-    this.tipo = true;
-    this.mensaje = 'Cambios validados correctamente (pendiente de conexión con el backend para guardar)';
-    this.cd.detectChanges();
+        // El backend hace update parcial: enviamos solo los campos editables que existen
+    // en la BBDD. Lo que no enviamos (incluida la password) se conserva.
+    // telefono y biografia no se envian: no existen como columnas (pendiente de equipo).
+    const body = {
+      username: this.miForm.value.username,
+      email: this.miForm.value.email,
+      zona_geografica: this.miForm.value.ubicacion,
+    };
+
+    this.usersService.updateUser(Number(this.userID), body).subscribe({
+      next: (usuario) => {
+        // Reflejar el username actualizado en el localStorage para el resto de la app
+        const u = localStorage.getItem('usuarioBuy&Sell');
+        if (u) {
+          const userLocal = JSON.parse(u);
+          userLocal.username = usuario.username ?? userLocal.username;
+          localStorage.setItem('usuarioBuy&Sell', JSON.stringify(userLocal));
+        }
+        this.tipo = true;
+        this.mensaje = 'Perfil actualizado correctamente';
+        this.cd.detectChanges();
+        setTimeout(() => this.router.navigate(['/user/panel/profile']), 800);
+      },
+      error: (err) => {
+        console.error(err);
+        this.tipo = false;
+        const backendMsg = err?.error?.detalles?.[0] ?? err?.error?.error;
+        this.mensaje = backendMsg ? backendMsg : 'No se ha podido actualizar el perfil';
+        this.cd.detectChanges();
+      }
+    });
   }
 }
