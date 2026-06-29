@@ -27,22 +27,23 @@ export class UserFormComponentComponent implements OnInit {
   miForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    telefono: new FormControl('', [Validators.required]),
     ubicacion: new FormControl('', [Validators.required]),
-    biografia: new FormControl(''),
+    direccion: new FormControl(''),
+    cp: new FormControl('', [Validators.pattern(/^\d{5}$/)]),
   });
 
   get username() { return this.miForm.get('username'); }
   get email() { return this.miForm.get('email'); }
-  get telefono() { return this.miForm.get('telefono'); }
   get ubicacion() { return this.miForm.get('ubicacion'); }
+  get direccion() { return this.miForm.get('direccion'); }
+  get cp() { return this.miForm.get('cp'); }
 
   ngOnInit(): void {
     this.userID = this.route.snapshot.params['userID'] ?? '';
 
     // Precarga real desde el backend (GET /usuarios/:id).
-    // NOTA: la tabla usuarios no tiene columnas telefono ni biografia,
-    // por eso esos dos campos no se precargan (pendiente de equipo/backend).
+    // Campos editables: username, ubicacion (zona_geografica), direccion y cp.
+    // El email se precarga pero no es editable.
     if (this.userID) {
       this.usersService.getUserById(this.userID).subscribe({
         next: (usuario) => {
@@ -50,6 +51,8 @@ export class UserFormComponentComponent implements OnInit {
             this.miForm.patchValue({
               username: usuario.username ?? '',
               email: usuario.email ?? '',
+              direccion: usuario.direccion ?? '',
+              cp: usuario.cp ?? '',
               ubicacion: usuario['zona_geogr\u00e1fica'] ?? usuario.zona_geografica ?? '',
             });
             const ini = `${(usuario.nombre ?? '').charAt(0)}${(usuario.apellidos ?? '').charAt(0)}`.toUpperCase();
@@ -95,12 +98,14 @@ export class UserFormComponentComponent implements OnInit {
     }
         // El backend hace update parcial: enviamos solo los campos editables que existen
     // en la BBDD. Lo que no enviamos (incluida la password) se conserva.
-    // telefono y biografia no se envian: no existen como columnas (pendiente de equipo).
-    const body = {
+    // El email no se envia (no editable) y la password se conserva en el backend.
+    const body: any = {
       username: this.miForm.value.username,
-      email: this.miForm.value.email,
       zona_geografica: this.miForm.value.ubicacion,
     };
+    // direccion y cp solo se envian si tienen valor (update parcial en backend).
+    if (this.miForm.value.direccion) body.direccion = this.miForm.value.direccion;
+    if (this.miForm.value.cp) body.cp = this.miForm.value.cp;
 
     this.usersService.updateUser(Number(this.userID), body).subscribe({
       next: (usuario) => {

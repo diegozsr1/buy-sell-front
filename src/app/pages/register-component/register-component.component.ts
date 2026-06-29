@@ -3,6 +3,7 @@ import { LoginRegister } from '../../components/organisms/login-register/login-r
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-component',
@@ -93,7 +94,14 @@ export class RegisterComponentComponent {
 
     this.usersService.registerUser(nuevoUsuario).subscribe({
       next: () => {
-        this.router.navigate(['/login']);
+        Swal.fire({
+          title: 'Cuenta creada',
+          text: 'Tu cuenta se ha creado correctamente. Ya puedes iniciar sesión.',
+          icon: 'success',
+          confirmButtonColor: '#003594'
+        }).then(() => {
+          this.router.navigate(['/login']);
+        });
       },
       error: (err) => {
         console.error(err);

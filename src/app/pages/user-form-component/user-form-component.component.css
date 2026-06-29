@@ -96,6 +96,7 @@ label {
 .boton-guardar {
   display: flex;
   justify-content: flex-end;
+    gap: .75rem;
 }
 
 /* Cambiar foto de perfil */
@@ -151,4 +152,17 @@ label {
   .header {
     display: none;
   }
+}
+
+/* Nota bajo el correo (no editable) y boton cancelar */
+.email-nota {
+    display: block;
+    margin-top: .25rem;
+    color: #6c757d;
+    font-size: .8rem;
+}
+.cancelar {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 }

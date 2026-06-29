@@ -55,11 +55,11 @@
     }
         @else if (variant() === 'owner') {
     <div class="owner-body">
-        <div class="owner-status" [class.publicado]="estado() === 'Publicado'" [class.revision]="estado() === 'En_revision'" [class.vendido]="estado() === 'Vendido'" [class.generico]="estado() !== 'Publicado' && estado() !== 'En_revision' && estado() !== 'Vendido'">
-            @if(estado() === 'Publicado'){ ACTIVO }
-            @else if(estado() === 'En_revision'){ EN REVISIÓN }
-            @else if(estado() === 'Vendido'){ VENDIDO }
-            @else { {{estado()}} }
+        <div class="owner-status" [class.publicado]="estadoArticulo() === 'Publicado'" [class.revision]="estadoArticulo() === 'En_revision'" [class.vendido]="estadoArticulo() === 'Vendido'" [class.generico]="estadoArticulo() !== 'Publicado' && estadoArticulo() !== 'En_revision' && estadoArticulo() !== 'Vendido'">
+            @if(estadoArticulo() === 'Publicado'){ ACTIVO }
+            @else if(estadoArticulo() === 'En_revision'){ EN REVISIÓN }
+            @else if(estadoArticulo() === 'Vendido'){ VENDIDO }
+            @else { {{estadoArticulo()}} }
         </div>
         <p class="owner-price">{{price()}} €</p>
         <h3 class="owner-name">{{name()}}</h3>

@@ -82,15 +82,3 @@ a p{
     cursor: pointer;
     color: red;
 }
-/* Hover de cada opcion del menu lateral */
-.nav-sidebar a:hover{
-    background-color:#EFF4FF;
-    color:#003594;
-}
-.nav-sidebar a:hover i, .nav-sidebar a:hover p{
-    color:#003594;
-}
-.cerrar-sesion:hover, .cerrar-sesion:hover p{
-    color:red;
-    background-color:#fdecec;
-}
