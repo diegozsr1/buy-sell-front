@@ -1,1 +1,26 @@
-<p>photo-uploader works!</p>
+<div class="d-flex flex-column gap-2">
+    <h2>Sube las fotos de tu artículo</h2>
+    <p>Muestra tu artículo desde todos los ángulos. Las fotos reales aumentan las ventas.</p>
+    <div class="d-flex flex-column gap-4">
+        <div [class]="['uploader','card', dragEvent()]"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"> 
+        <atom-icon variant="camera"></atom-icon>
+        <span class="guide-text-1"> Arrastra tus fotos aquí</span>
+        <span class="guide-text-2">O selecciónalas desde tu ordenador</span>
+        <input #fileInput type="file" accept="image/png, image/jpeg" multiple hidden (change)="uploadPhotos($event)"/>
+        <atom-button config_type="secondary" label="Seleccionar archivos" (clickButton)="fileInput.click()"></atom-button>
+        <span class="guide-text-3">PNG, JPG HASTA 10MB</span>        
+    </div>
+        <div class="d-flex flex-row gap-4">
+            <div [class]="['caption','card']"> 
+                <img src="" alt="">
+                <button class="remove-btn">X</button>
+            </div>
+            <div [class]="['caption','card']"> </div>
+            <div [class]="['caption','card']"> </div>
+            <div [class]="['caption','card']"> </div>
+        </div>
+    </div>
+</div>
