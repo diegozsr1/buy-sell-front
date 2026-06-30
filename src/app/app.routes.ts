@@ -102,12 +102,12 @@ export const routes: Routes = [
                         component: EditArticle
                     },
                     {
-<<<<<<< HEAD
-                        path: 'messages', component: MessagesComponentComponent
-=======
                         path: 'edit-profile/:userID',
                         component: UserFormComponentComponent
->>>>>>> 8726d4a325f8672f6e046015482f5bf0452e393f
+                    },
+                    {
+                        path: 'messages',
+                        component: MessagesComponentComponent
                     }
                 ]
              },
@@ -117,15 +117,7 @@ export const routes: Routes = [
             /*{ path: 'my-purchases', component: UserMyPurchasesComponentComponent },*/
             //reportes
             {path: 'report/product/:productID', component: ProductReportPage},
-            // Ruta Mensajeria
-<<<<<<< HEAD
-            // { path: 'messages', component: MessagesComponentComponent },
-            //{ path: 'messages/:userID', component: ChatComponentComponent },
-=======
-            { path: 'messages', component: MessagesComponentComponent },
-            { path: 'messages/:userID', component: ChatComponentComponent },
             { path: 'sellers/:userID', component: SellerProfile },
->>>>>>> 8726d4a325f8672f6e046015482f5bf0452e393f
         ]
     },
 
