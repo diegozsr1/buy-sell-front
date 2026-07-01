@@ -16,6 +16,8 @@
         </div>
     </div>
     <div class="contenedor">
+        <div [class.text-danger]="tipo===false" [class.text-success]="tipo===true">{{mensaje}}</div>
+        <form [formGroup]="miForm" (ngSubmit)="loadData()">
         <h1>Editar artículo</h1>
         <div class="card">
             <div class="card-body">
@@ -32,8 +34,7 @@
 
 
         </div>
-        <div [class.text-danger]="tipo===false" [class.text-success]="tipo===true">{{mensaje}}</div>
-        <form [formGroup]="miForm" (ngSubmit)="loadData()">
+        
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Datos del artículo</h5>
@@ -120,7 +121,9 @@
 
             </div>
             <div class="boton-guardar">
+                <button [routerLink]="['/user/panel/sales']" class="btn btn-primary cancelar">Cancelar</button>
                 <button type="submit" class="btn btn-primary guardar">Guardar cambios</button>
+                
             </div>
             
         </form>

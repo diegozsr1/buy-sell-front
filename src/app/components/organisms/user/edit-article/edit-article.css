@@ -114,6 +114,11 @@ label{
 .label-provincia{
     color:white;
 }
+.cancelar{
+    background-color: gray;
+    border:1px solid gray;
+    margin-right: 1rem;
+}
 /* Mobile */
 @media (max-width: 768px) {
     .header{
