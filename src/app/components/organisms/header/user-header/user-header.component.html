@@ -57,8 +57,8 @@
                 <i class="bi bi-bell"></i>
             </button>
         
-            <a class="avatar" [routerLink]="['/user/panel/profile']">
-                {{ userInitials }}
+            <a [routerLink]="['/user/panel/profile']">
+                <atom-icon variant="profile-primary-circle" [text_icon]="userInitials" size="1rem" link="/user/panel/profile" ></atom-icon>
             </a>
         </div>
     </div>
