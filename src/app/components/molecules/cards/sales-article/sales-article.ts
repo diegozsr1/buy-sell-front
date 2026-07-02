@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ArticlesService } from '../../../../services/articles-service';
 
 @Component({
   selector: 'app-sales-article',
@@ -20,6 +21,7 @@ export class SalesArticle {
   @Output() clicarEditar = new EventEmitter<number>();
   @Output() clicarEliminar = new EventEmitter<number>();
   @Output() clicarPausar = new EventEmitter<number>();
+  articlesService = inject(ArticlesService);
 
   editar(): void {
     this.clicarEditar.emit(this.articleId);
@@ -41,10 +43,13 @@ export class SalesArticle {
         }).then((result) => {
           if (result.isConfirmed) {
             console.log(articleId);
-    /*
-            this.categoriesService.deleteCategory(id).subscribe({
+    
+            this.articlesService.updateArticleVendido(articleId,{estado:'Vendido'}).subscribe({
               next: (data) => {
                 Swal.fire('Actualizado!', '', 'success');
+                setTimeout(()=>{
+                  window.location.reload();
+                },1000);
               },
               error: (err) => {
                 console.error(err);
@@ -52,7 +57,7 @@ export class SalesArticle {
     
               }
             });
-            */
+            
           }
         });
   }

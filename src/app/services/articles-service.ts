@@ -53,9 +53,12 @@ export class ArticlesService {
     return this.httpClient.put<any>(this.baseUrl + id, article);
   }
 
-
   updateArticleAndCP(id:number,body:any):Observable<any>{
     return this.httpClient.put(this.baseUrl + `${id}/cp`,body,{})
+  }
+
+  updateArticleVendido(id:number,body:any):Observable<any>{
+    return this.httpClient.patch(this.baseUrl + `${id}/actualiza-estado-vendido`,body,{})
   }
 
   deleteArticle(id: number): Observable<any> {
