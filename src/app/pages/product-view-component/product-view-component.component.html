@@ -65,22 +65,22 @@
 
         @if (isOwner()) {
             <div class="d-flex flex-column gap-2">
-                <atom-button config_type="secondary" label="Editar artículo" (click)="onEditar($event)"></atom-button>
-                <atom-button config_type="outline" label="Marcar como vendido" (click)="onMarcarComoVendido($event)"></atom-button>
-                <atom-button config_type="delete" icon="trash" iconPosition="left" label="Eliminar artículo" class="deleteArt" (click)="onEliminarArticulo($event)"></atom-button>
+                <atom-button config_type="secondary" label="Editar artículo" (clickButton)="onEditar($event)"></atom-button>
+                <atom-button config_type="outline" label="Marcar como vendido" (clickButton)="onMarcarComoVendido($event)"></atom-button>
+                <atom-button config_type="delete" icon="trash" iconPosition="left" label="Eliminar artículo" class="deleteArt" (clickButton)="onEliminarArticulo($event)"></atom-button>
             </div>
         } @else {
             @if (product()?.estado_articulo_id === "Publicado") {
                 <div class="d-flex flex-column gap-2">
-                    <atom-button config_type="secondary" icon="chat-left" label="Compra el artículo para chatear" (click)="onContactar($event)"></atom-button>
-                    <atom-button config_type="primary" label="Comprar ahora" (click)="onComprar($event)"></atom-button>
-                    <atom-button config_type="link" icon="flag" label="Informar de un problema con este producto" (click)="onInformar($event)"></atom-button>
+                    <atom-button config_type="secondary" icon="chat-left" label="Compra el artículo para chatear" (clickButton)="onContactar($event)"></atom-button>
+                    <atom-button config_type="primary" label="Comprar ahora" (clickButton)="onComprar($event)"></atom-button>
+                    <atom-button config_type="link" icon="flag" label="Informar de un problema con este producto" (clickButton)="onInformar($event)"></atom-button>
                 </div>
             } @else {
                 <div class="d-flex flex-column gap-2">
-                    <atom-button config_state="disabled" config_type="secondary" icon="chat-left" label="Compra el artículo para chatear" (click)="onContactar($event)"></atom-button>
-                    <atom-button config_state="disabled" config_type="primary" label="Comprar ahora" (click)="onComprar($event)"></atom-button>
-                    <atom-button config_type="link" icon="flag" label="Informar de un problema con este producto" (click)="onInformar($event)"></atom-button>
+                    <atom-button config_state="disabled" config_type="secondary" icon="chat-left" label="Compra el artículo para chatear" (clickButton)="onContactar($event)"></atom-button>
+                    <atom-button config_state="disabled" config_type="primary" label="Comprar ahora" (clickButton)="onComprar($event)"></atom-button>
+                    <atom-button config_type="link" icon="flag" label="Informar de un problema con este producto" (clickButton)="onInformar($event)"></atom-button>
                 </div>
             }
             
