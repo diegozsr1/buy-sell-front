@@ -18,6 +18,7 @@ import { ReportModal } from "../../components/molecules/report-modal/report-moda
 import { CheckoutService } from '../../services/checkout-service';
 import { FavoritesService } from '../../services/favorites-service';
 import { Toast } from '../../components/atoms/toast/toast';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-view-component',
@@ -161,7 +162,7 @@ export class ProductViewComponentComponent {
 
   breadcrumbItemsOwner = computed(() => [
   { label: 'Inicio', route: '/' },
-  { label: 'Mis ventas', route: '/profile' },
+  { label: 'Mis productos', route: '/profile' },
   { label: this.product()?.titulo }
   ]);
 
@@ -228,7 +229,11 @@ export class ProductViewComponentComponent {
   // Eventos compra
 
   onContactar(event: MouseEvent) {
-    this.router.navigate(['/profile'])
+    void Swal.fire({
+      title: 'Mensajes',
+      text: 'Compra el artículo para chatear con el vendedor.',
+      icon: 'info',
+    });
   }
   onComprar(event: MouseEvent) {
     const article = this.product();
