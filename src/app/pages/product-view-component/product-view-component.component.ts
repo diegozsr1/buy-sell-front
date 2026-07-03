@@ -55,7 +55,7 @@ export class ProductViewComponentComponent {
 
   //toast avisos de favoritos
   showToast = signal<boolean>(false);
-  toastVariant = signal<'success' | 'warn' | 'trash'>('success');
+  toastVariant = signal<'success' | 'info' | 'warn' | 'trash'>('success');
   toastMessage = signal<string>('');
   
   private router = inject(Router);
@@ -226,7 +226,7 @@ export class ProductViewComponentComponent {
       } else {
         await lastValueFrom(this.favoritesService.deleteFavorite(this.favoritoId()!));
         this.favoritoId.set(null);
-        this.lanzarToast('trash', 'Artículo eliminado de favoritos');
+        this.lanzarToast('info', 'Artículo eliminado de favoritos');
       }
     } catch (error: any) {
       this.router.navigate(['/500error']);
@@ -234,7 +234,7 @@ export class ProductViewComponentComponent {
   }
 
   // Dispara el toast reutilizando el patron del proyecto (senal trigger)
-  private lanzarToast(variant: 'success' | 'warn' | 'trash', message: string) {
+  private lanzarToast(variant: 'success' | 'info' | 'warn' | 'trash', message: string) {
     this.toastVariant.set(variant);
     this.toastMessage.set(message);
     this.showToast.set(false);
