@@ -1,12 +1,16 @@
+:host{
+  --page-padding: 2rem 3rem 1.5rem 3rem;
+}
+
+
 .explore {
   background-color: var(--surface-page);
   min-height: 100%;
 }
 
 .explore-search {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 1.5rem;
+  padding: var(--page-padding);
 }
 
 .explore-search__title {
@@ -92,9 +96,8 @@
 }
 
 .explore-body {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: var(--page-padding);
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 2rem;
@@ -279,7 +282,7 @@
 
 .results__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.25rem;
 }
 
@@ -528,10 +531,6 @@
   .filters {
     position: static;
   }
-
-  .results__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -551,10 +550,6 @@
 
   .explore-search__btn {
     width: 100%;
-  }
-
-  .results__grid {
-    grid-template-columns: 1fr;
   }
 
   .results__header {
