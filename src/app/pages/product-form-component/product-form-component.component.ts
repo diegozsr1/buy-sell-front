@@ -14,6 +14,7 @@ import { ArticlesService } from '../../services/articles-service';
 import { IArticleDetail, IArticlePrice, INewArticleWithPhoto } from '../../interfaces/i-article';
 import { ArticleStatus } from '../../enums/article-status.enum';
 import { LoadingOverlay } from "../../components/molecules/loading-overlay/loading-overlay";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-form-component',
@@ -210,12 +211,22 @@ export class ProductFormComponentComponent implements OnInit{
       }
       },
       error: (err) => {
+      
+        this.isValidating.set(false);
+        this.showPublishArticleError()
         console.error(err);
       }
     });
    
   }
 
+  protected showPublishArticleError(){
+    void Swal.fire({
+          title: 'Publicar Artículo',
+          text: 'Error en la publicación del artículo',
+          icon: 'error',
+    });
+  }
 
   protected onPublish() {
     this.createArticle(ArticleStatus.PUBLISHED);
