@@ -200,9 +200,18 @@ export class ProductViewComponentComponent {
   async toggleFav() {
     const raw = localStorage.getItem('usuarioBuy&Sell');
     if (!raw) {
-      // Sin sesion: avisamos y redirigimos al login
-      this.lanzarToast('warn', 'Debes iniciar sesión para guardar favoritos');
-      setTimeout(() => this.router.navigate(['/login']), 1200);
+      // Sin sesion: preguntamos si quiere iniciar sesion
+      const result = await Swal.fire({
+        title: 'Inicia sesión',
+        text: 'Debes iniciar sesión para guardar artículos en favoritos.',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Iniciar sesión',
+        cancelButtonText: 'Cancelar',
+      });
+      if (result.isConfirmed) {
+        this.router.navigate(['/login']);
+      }
       return;
     }
     const userId = JSON.parse(raw).id;
