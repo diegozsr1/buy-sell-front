@@ -33,7 +33,6 @@ export class SalesArticle {
       this.ordersService.getLastOrderByArticleId(this.articleId).subscribe({
         next: (data) => {
           this.pedido = data;
-          console.log(data);
           this.cd.detectChanges();
         },
         error: (error) => {
@@ -63,8 +62,6 @@ export class SalesArticle {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(articleId);
-
         this.articlesService.updateArticleVendido(articleId, { estado: 'Vendido' }).subscribe({
           next: (data) => {
             Swal.fire('Actualizado!', '', 'success');
@@ -85,9 +82,6 @@ export class SalesArticle {
   modificarEstado(articleId: number, event: Event) {
     const estado = (event.target as HTMLSelectElement).value;
 
-    console.log('Artículo:', articleId);
-    console.log('Estado seleccionado:', estado);
-    console.log(this.pedido.id);
     this.ordersService.updateOrder(this.pedido.id, { estado }).subscribe({
       next: (data) => {
         Swal.fire('Estado actualizado', '', 'success');

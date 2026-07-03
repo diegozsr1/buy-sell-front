@@ -171,12 +171,10 @@ export class EditArticle {
     }
   }
   loadData2(article_id: number) {
-    console.log(article_id);
     if (!this.miForm2.valid) {
       this.miForm.markAllAsTouched();
       return;
     }
-    console.log(this.miForm2.value);
 
     const formData = new FormData();
 
@@ -186,9 +184,6 @@ export class EditArticle {
     /*cambiar el nombre de icono */
     if (this.imagenFile) {
       formData.append('photo', this.imagenFile);
-    }
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
     }
 
     this.articlePhotoService.insertFoto(formData).subscribe({

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-admin-moderator-menu-drawer',
@@ -9,6 +10,7 @@ import { RouterLink } from "@angular/router";
 })
 export class AdminModeratorMenuDrawerComponent {
   user: any = {};
+  private authService = inject(AuthService);
 
   @Output() closeMenu = new EventEmitter<void>();
 
@@ -25,8 +27,7 @@ export class AdminModeratorMenuDrawerComponent {
   }
 
   logout(): void {
-    localStorage.clear();
-    window.location.href = '/login';
+    this.authService.logout();
   }
 
 }

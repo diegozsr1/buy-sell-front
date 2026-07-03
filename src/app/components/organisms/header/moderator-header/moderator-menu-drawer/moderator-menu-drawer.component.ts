@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-moderator-menu-drawer',
@@ -9,6 +10,7 @@ import { RouterLink } from "@angular/router";
 })
 export class ModeratorMenuDrawerComponent {
   user: any = {};
+  private authService = inject(AuthService);
 
   //admin loggado?
   isAdmin = signal<boolean>(false);
@@ -29,7 +31,6 @@ export class ModeratorMenuDrawerComponent {
   }
 
   logout(): void {
-    localStorage.clear();
-    window.location.href = '/login';
+    this.authService.logout();
   }
 }

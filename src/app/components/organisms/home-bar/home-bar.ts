@@ -38,10 +38,8 @@ export class HomeBar {
     this.categoriesService.getAllCategories().subscribe({
       next: (data) => {
         if (data.error) {
-        console.log(data.error);
         return;
       } else {
-        console.log(data);
         this.categorias = data;
         this.cd.detectChanges();
       }

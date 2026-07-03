@@ -25,7 +25,6 @@ export class Panel {
       next: (data) => {
         this.estadisticas = data;
         this.cd.detectChanges();
-        console.log('Estadísticas:', data);
       },
       error: (error) => {
         console.error('Error al cargar estadísticas:', error);
@@ -34,11 +33,9 @@ export class Panel {
     this.usersService.getAllUsers().subscribe({
       next: (data) => {
         if (data.error) {
-          console.log(data.error);
           return;
         } else {
           this.usuarios = data;
-          console.log(this.usuarios);
           this.cd.detectChanges();
         }
       },
