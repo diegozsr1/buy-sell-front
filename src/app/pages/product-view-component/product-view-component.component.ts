@@ -11,7 +11,6 @@ import { lastValueFrom } from 'rxjs';
 import { UsersService } from '../../services/users-service';
 import { UserRatingCardData } from '../../components/molecules/user-card/user-rating-card/user-rating-card.config';
 import { UserRatingCard } from "../../components/molecules/user-card/user-rating-card/user-rating-card";
-import { ArticlePhotoService } from '../../services/article-photo-service';
 import { IArticlePhoto } from '../../interfaces/i-article-photo.interface';
 import { HomeBar } from "../../components/organisms/home-bar/home-bar";
 import { ReportModal } from "../../components/molecules/report-modal/report-modal";
@@ -19,6 +18,9 @@ import { CheckoutService } from '../../services/checkout-service';
 import { FavoritesService } from '../../services/favorites-service';
 import { Toast } from '../../components/atoms/toast/toast';
 import Swal from 'sweetalert2';
+import { ArticlePhotosService } from '../../services/article-photos.service';
+import { Role } from '../../enums/role.enum';
+
 
 @Component({
   selector: 'app-product-view-component',
@@ -34,7 +36,7 @@ export class ProductViewComponentComponent {
   articleService = inject(ArticlesService);
   ratingsService = inject(RatingsService);
   userService = inject(UsersService);
-  articlePhotoService = inject(ArticlePhotoService);
+  photoService = inject(ArticlePhotosService);
   favoritesService = inject(FavoritesService);
 
   //Datos Vendedor
@@ -79,7 +81,7 @@ export class ProductViewComponentComponent {
       const [seller, sellerRatings, fotos] = await Promise.all([
         lastValueFrom(this.userService.getUserById((  sellerId).toString() )),
         lastValueFrom(this.ratingsService.getAverageRatingsByUser(sellerId)),
-        lastValueFrom(this.articlePhotoService.getFotosByArticuloId(Number(id)))
+        lastValueFrom(this.photoService.getPhotosByArticleId(Number(id)))
       ]) 
 
       //fav
@@ -149,25 +151,33 @@ export class ProductViewComponentComponent {
     const raw = localStorage.getItem('usuarioBuy&Sell');
     if(!raw) return false;
     const user = JSON.parse(raw);
-    return user.id === this.product()?.usuarios_id;
+    
+    return Number(user.id) === Number(this.product()?.usuarios_id);
   });
 
   // breadcrumb items
 
   protected breadcrumbItems = computed(() => [
   { label: 'Inicio', route: '/' },
-  { label: 'Productos'},
+  { label: 'Productos', route: '/explore'},
   { label: this.product()?.titulo }
   ]);
 
   breadcrumbItemsOwner = computed(() => [
   { label: 'Inicio', route: '/' },
-  { label: 'Mis productos', route: '/profile' },
+  { label: 'Mis productos', route: '/user/panel/sales' },
   { label: this.product()?.titulo }
   ]);
 
   selectFoto(foto: IArticlePhoto) {
     this.selectedPhoto.set(foto);
+  }
+
+  private isGuest(){
+    const raw = localStorage.getItem('usuarioBuy&Sell');
+    if (!raw) return "guest";
+    const rol = JSON.parse(raw).rol;  
+    return !(rol===Role.USUARIO || rol===Role.MODERADOR || rol===Role.ADMINISTRADOR);
   }
 
   //favoritos
@@ -236,14 +246,22 @@ export class ProductViewComponentComponent {
     });
   }
   onComprar(event: MouseEvent) {
-    const article = this.product();
-    if (!article) return;
-
-    this.checkoutService.setCheckoutProduct(article);
-    this.router.navigate(['/user/product/checkout', article.id]);
+    if(this.isGuest()){
+      this.router.navigate(['/login']);
+    } else {
+      const article = this.product();
+      if (!article) return;
+      this.checkoutService.setCheckoutProduct(article);
+      this.router.navigate(['/user/product/checkout', article.id]);
+    }
   }
+
   onInformar(event: MouseEvent) {
-    this.showReportModal.set(true);
+    if(this.isGuest()){
+      this.router.navigate(['/login'])
+    } else {
+      this.showReportModal.set(true);
+    }
   }
 
   // eventos propietario
@@ -258,4 +276,13 @@ export class ProductViewComponentComponent {
     //servicio para eliminar articulo
     this.deleteProduct();
   }
+
+  navigateToVendorProfile(){
+    if(this.isGuest()){
+      this.router.navigate(['/login'])
+    } else {
+      this.router.navigate([`/user/sellers/${this.vendedorData()?.promedio.usuario_id}`])
+    }
+  }
 }
+
