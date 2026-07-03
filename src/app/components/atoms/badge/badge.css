@@ -36,28 +36,28 @@
 
 /* Estado artículo */
 .app-badge--borrador{
-    background-color: transparent; 
-    color: var(--text-outline); 
+    background-color: var(--text-outline); 
+    color: var(--surface-page); 
 }
 .app-badge--publicado{
-    background-color: transparent;
+    background-color: var(--success-bg);
     color: var(--success); 
 }
 .app-badge--en_revision{
-    background-color: transparent; 
+    background-color: var(--warn-bg); 
     color: var(--warn); 
 }
 .app-badge--retirado{
-    background-color: transparent; 
+    background-color: var(--err-bg); 
     color: var(--err); 
 }
 .app-badge--reservado{
-    background-color: transparent; 
-    color: var(--secondary-cta); 
+    background-color: var(--secondary-cta);  
+    color: var(--surface-page); 
 }
 .app-badge--vendido{
-    background-color: transparent; 
-    color: var(--primary-cta); 
+    background-color: var(--primary-cta); 
+    color: var(--surface-page); 
 }
 
 /* Rol usuario */
