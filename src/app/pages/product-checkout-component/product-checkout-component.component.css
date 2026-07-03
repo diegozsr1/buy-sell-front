@@ -160,6 +160,13 @@
   color: var(--text-secondary);
 }
 
+.checkout-payment__info {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 .checkout-payment {
   display: flex;
   align-items: center;

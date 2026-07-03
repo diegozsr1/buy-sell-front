@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, OnInit, signal, untracked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HomeBar } from '../../components/organisms/home-bar/home-bar';
 import { Button } from '../../components/atoms/button/button';
 import { Badge } from '../../components/atoms/badge/badge';
@@ -11,6 +11,8 @@ import { ArticlesService } from '../../services/articles-service';
 import { CategoriesService } from '../../services/categories-service';
 import { ICategory } from '../../interfaces/i-category';
 import { IExploreArticulo } from '../../interfaces/i-explore-articulos';
+import { map } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface ExploreArticle {
   id: number;
@@ -41,7 +43,10 @@ interface ExploreCategoryFilter {
   styleUrl: './explore-component.css',
 })
 export class ExploreComponent implements OnInit {
+
+
   private router = inject(Router);
+  private activedRoute = inject(ActivatedRoute);
   private articlesService = inject(ArticlesService);
   private categoriesService = inject(CategoriesService);
   private cd = inject(ChangeDetectorRef);
@@ -49,9 +54,11 @@ export class ExploreComponent implements OnInit {
   private readonly placeholderImage =
     'https://placehold.co/400x300/E5EEFF/747683?text=Sin+imagen';
 
+  protected readonly PRICE_MIN: number = 0;
+  protected readonly PRICE_MAX: number = 1;
   searchQuery = '';
-  priceMin: number | null = null;
-  priceMax: number | null = null;
+  priceMin = signal<number | null>(null);
+  priceMax = signal<number | null>(null);
   locationFilter = '';
   sortBy = 'relevancia';
   currentPage = 1;
@@ -81,6 +88,10 @@ export class ExploreComponent implements OnInit {
   totalResults = 0;
   totalPages = 0;
 
+
+  // Signal query params change detection
+ 
+
   get showingFrom(): number {
     if (this.totalResults === 0) return 0;
     return (this.currentPage - 1) * this.pageSize + 1;
@@ -98,9 +109,30 @@ export class ExploreComponent implements OnInit {
     return this.currentPage < this.totalPages && !this.loading;
   }
 
+  constructor() {
+    effect(() => {
+      this.selectedCategory();   // dependencia: se re-ejecuta al cambiar la URL
+      untracked(() => this.applyCategoryAndLoad()); // Untracked para que no se registren las signals de dentro de esta función ()
+    });
+  }
+
   ngOnInit(): void {
     this.loadCategories();
-    this.loadArticles();
+  }
+
+
+  protected selectedCategory = toSignal(
+    this.activedRoute.queryParamMap.pipe(
+      map(params => Number(params.get('categoria')) || null)
+    ),
+    { initialValue: null }
+  );
+
+  private applyCategoryAndLoad(): void {
+    if (this.categories.length === 0) return;
+    const categoryId = this.selectedCategory();
+    this.categories.forEach(c => (c.checked = c.id === categoryId));
+    this.loadArticles(1);
   }
 
   private loadCategories(): void {
@@ -113,6 +145,7 @@ export class ExploreComponent implements OnInit {
             checked: false,
           }));
           this.cd.detectChanges();
+          this.applyCategoryAndLoad(); 
         }
       },
       error: (err) => console.error(err),
@@ -140,8 +173,8 @@ export class ExploreComponent implements OnInit {
         categorias_id: selectedCategories.length
           ? selectedCategories.join(',')
           : undefined,
-        precio_min: this.priceMin ?? undefined,
-        precio_max: this.priceMax ?? undefined,
+        precio_min: this.priceMin() ?? undefined,
+        precio_max: this.priceMax() ?? undefined,
         estado_conservacion: selectedConditions.length
           ? selectedConditions.join(',')
           : undefined,
@@ -198,6 +231,22 @@ export class ExploreComponent implements OnInit {
     this.loadArticles(1);
   }
 
+  onPriceMinChange(value: number | null) {
+    if (value !== null && value < this.PRICE_MIN) {
+      this.priceMin.set(this.PRICE_MIN);
+    } else {
+      this.priceMin.set(value);
+    }
+  } 
+
+   onPriceMaxChange(value: number | null) {
+    if (value !== null && value < this.PRICE_MAX) {
+      this.priceMax.set(this.PRICE_MAX);
+    } else {
+      this.priceMax.set(value);
+    }
+  } 
+
   applyTrend(trend: string): void {
     this.searchQuery = trend;
     this.onSearch();
@@ -206,8 +255,8 @@ export class ExploreComponent implements OnInit {
   clearFilters(): void {
     this.categories.forEach((c) => (c.checked = false));
     this.conditions.forEach((c) => (c.checked = false));
-    this.priceMin = null;
-    this.priceMax = null;
+    this.priceMin.set(null);
+    this.priceMax.set(null);
     this.locationFilter = '';
     this.loadArticles(1);
   }
