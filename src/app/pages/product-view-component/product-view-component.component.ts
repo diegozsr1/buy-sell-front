@@ -200,10 +200,15 @@ export class ProductViewComponentComponent {
           this.favoritesService.addFavorite(userId, Number(this.productID()))
         );
         this.favoritoId.set(res.id);
+        Swal.fire({
+          title: 'Artículo agregado a favoritos',
+          icon: 'success',})
       } else {
         await lastValueFrom(this.favoritesService.deleteFavorite(this.favoritoId()!));
         this.favoritoId.set(null);
-        
+        Swal.fire({
+          title: 'Artículo eliminado de favoritos',
+          icon: 'info',})
       }
     } catch (error: any) {
       this.router.navigate(['/500error']);
