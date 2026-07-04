@@ -191,7 +191,18 @@ export class ProductViewComponentComponent {
 
   async toggleFav() {
     const raw = localStorage.getItem('usuarioBuy&Sell');
-    if (!raw) return;
+    if (!raw) {
+      Swal.fire({
+        title: 'Debes iniciar sesión para agregar a favoritos',
+        icon: 'warning',
+        confirmButtonText: 'Iniciar sesión',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login']);
+        }
+      });
+      return;
+    };
     const userId = JSON.parse(raw).id;
 
     try {
