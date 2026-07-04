@@ -74,16 +74,10 @@
 }
 
 .contenedor {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: flex-start;
-}
-
-.contenedor molecule-article-card {
-  flex: 0 0 210px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  animation: fadeIn 1s ease;
 }
 
 .empty {
@@ -101,9 +95,6 @@
   .profile-edit {
     margin-left: 0;
     width: 100%;
-  }
-  .contenedor molecule-article-card {
-    flex: 0 0 100%;
   }
 }
 

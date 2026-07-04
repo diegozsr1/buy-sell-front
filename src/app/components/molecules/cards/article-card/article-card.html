@@ -58,7 +58,7 @@
     <p class="price">{{price()}} €</p>
     <atom-button class="btn-outstanding" label="Comprar ahora" icon="cart"/>
     }
-        @else if (variant() === 'owner') {
+    @else if (variant() === 'owner') {
     <div class="owner-body">
         <div class="owner-status" [class.publicado]="estadoArticulo() === 'Publicado'" [class.revision]="estadoArticulo() === 'En_revision'" [class.vendido]="estadoArticulo() === 'Vendido'" [class.generico]="estadoArticulo() !== 'Publicado' && estadoArticulo() !== 'En_revision' && estadoArticulo() !== 'Vendido'">
             @if(estadoArticulo() === 'Publicado'){ ACTIVO }
