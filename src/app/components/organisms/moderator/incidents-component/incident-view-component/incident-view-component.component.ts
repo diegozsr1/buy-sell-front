@@ -77,24 +77,15 @@ export class IncidentViewComponentComponent {
   }
 
   cargarFotoArticulo() {
-    console.log('Articulo ID actual:', this.articuloId);
-
     this.articlePhotosService.getAllArticlePhotos().subscribe({
       next: (fotos) => {
-        console.log('Todas las fotos:', fotos);
-
         const fotosDelArticulo = fotos.filter((foto: any) =>
           Number(foto.articulos_id) === Number(this.articuloId)
         );
 
-        console.log('Fotos del artículo:', fotosDelArticulo);
-
         this.fotoArticulo = fotosDelArticulo.find((foto: any) =>
           Number(foto.principal) === 1
         );
-
-        console.log('Foto principal:', this.fotoArticulo);
-        console.log('URL foto:', this.fotoArticulo?.url_foto);
 
         this.cd.detectChanges();
       },

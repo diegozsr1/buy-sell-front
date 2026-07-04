@@ -147,9 +147,6 @@ export class DetalleUsuario {
 
       }
 
-      if (result.isDismissed) {
-        console.log('Usuario canceló');
-      }
     });
   }
 
@@ -187,9 +184,6 @@ export class DetalleUsuario {
 
       }
 
-      if (result.isDismissed) {
-        console.log('Usuario canceló');
-      }
     });
   }
 

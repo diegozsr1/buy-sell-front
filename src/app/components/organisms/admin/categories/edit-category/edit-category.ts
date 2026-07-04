@@ -82,9 +82,6 @@ export class EditCategory {
     if (this.imagenFile) {
       formData.append('icono', this.imagenFile);
     }
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    } 
 
         this.categoriesService.updateCategory(Number(this.id),formData).subscribe({
           next: (data) => {

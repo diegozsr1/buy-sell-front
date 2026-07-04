@@ -60,9 +60,7 @@ export class DetailForm {
           this.categories.set(data);
         }
       },
-      error: (err) => {
-        console.log(err)
-      }
+      error: () => {}
     })
 
   }

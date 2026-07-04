@@ -118,8 +118,6 @@ export class ProductViewComponentComponent {
       cp:                     articulo.cp,
     };
 
-    console.log('payload:', payload);
-
     try {
       await lastValueFrom(this.articleService.updateArticle(Number(id), payload));
       this.product.set({ ...articulo, estado_articulo_id: 'Vendido' });

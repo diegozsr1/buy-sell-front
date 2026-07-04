@@ -36,7 +36,6 @@ export class Sales {
           this.articulos_filtrados = data.filter(
             (a: IArticle) => a.estado_articulo_id === 'Vendido'
           );
-          console.log(this.articulos_filtrados);
           this.cd.detectChanges();
         },
         error: (error) => {

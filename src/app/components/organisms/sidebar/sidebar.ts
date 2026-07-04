@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { HeaderProfile } from '../../molecules/header-profile/header-profile';
 import { SidebarVariant } from './sidebar.config';
 import { RatingsService } from '../../../services/ratings-service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'organism-sidebar',
@@ -17,6 +18,7 @@ export class Sidebar {
   tipo: boolean = false;
   user: any = {};
   ratingsService = inject(RatingsService);
+  private authService = inject(AuthService);
   ratings: any = {};
 
   constructor(private cd: ChangeDetectorRef){}
@@ -25,14 +27,12 @@ export class Sidebar {
     const usuarioString = localStorage.getItem('usuarioBuy&Sell');
     if (usuarioString) {
       this.user = JSON.parse(usuarioString);
-      console.log(this.user.id);
       this.ratingsService.getAverageRatingsByUser(this.user.id).subscribe({
         next: (data) => {
           if (data.error) {
             this.mensaje = data.error;
             return;
           } else {
-            console.log(data);
             this.ratings = data;
             this.cd.detectChanges();
           }
@@ -46,8 +46,7 @@ export class Sidebar {
   }
 
   logout(): void {
-    localStorage.clear();
-    window.location.href = '/login';
+    this.authService.logout();
   }
 
   showAdminBtn = computed(() => {

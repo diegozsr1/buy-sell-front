@@ -67,7 +67,6 @@ export class ReviewView {
 
     try {
       this.review.set(await lastValueFrom(this.ratingService.getRatingByID(Number(this.reviewID()))));
-      console.log(this.review());
       
     } catch (error) {
       this.router.navigate(['/500error']);
@@ -77,7 +76,6 @@ export class ReviewView {
 
     try {
       await this.loadValorador();
-      console.log(this.valorador());
       
     } catch (error) {
       this.router.navigate(['/500error']);

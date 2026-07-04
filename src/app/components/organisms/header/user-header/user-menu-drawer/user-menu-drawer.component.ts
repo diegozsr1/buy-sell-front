@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, inject, Output } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { RatingsService } from '../../../../../services/ratings-service';
+import { AuthService } from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-user-menu-drawer',
@@ -14,6 +15,7 @@ export class UserMenuDrawerComponent {
   userName = "User Name"
   userRating = 0
   ratingsService = inject(RatingsService);
+  private authService = inject(AuthService);
 
   @Output() closeMenu = new EventEmitter<void>();
 
@@ -28,10 +30,8 @@ export class UserMenuDrawerComponent {
 
       this.ratingsService.getAverageRatingsByUser(usuario.id).subscribe((data) => {
       if (data.error) {
-        console.log(data.error);
         return;
       } else {
-        console.log(data);
         this.userRating = data.puntuacion_media.toFixed(1);
         this.cd.detectChanges();
       }
@@ -45,8 +45,7 @@ export class UserMenuDrawerComponent {
   }
 
   logout(): void {
-    localStorage.clear();
-    window.location.href = '/login';
+    this.authService.logout();
   }
 
 }

@@ -16,6 +16,7 @@ import { RatingsService } from '../../services/ratings-service';
 import { OrdersService } from '../../services/orders-service';
 import { ArticlesService } from '../../services/articles-service';
 import { ArticleStatus } from '../../enums/article-status.enum';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-seller-profile',
@@ -58,6 +59,7 @@ export class SellerProfile {
   private articleService = inject(ArticlesService)
   private ratingService = inject(RatingsService)
   private orderService = inject(OrdersService)
+  private authService = inject(AuthService)
 
   
 
@@ -68,12 +70,10 @@ export class SellerProfile {
     });
 
     const usuarioString = localStorage.getItem('usuarioBuy&Sell');
-     console.log(this.user)
     if (usuarioString) {
       this.user = JSON.parse(usuarioString);
-      console.log(this.user)
       this.role.set('user')
-    }    
+    }
     this.loadUser();
 
     this.userService.getUserById(this.userID()).subscribe({
@@ -161,8 +161,7 @@ export class SellerProfile {
   }
 
   logout(): void {
-    localStorage.clear();
-    window.location.href = '/login';
+    this.authService.logout();
   }
 
  //carga de producto y datos

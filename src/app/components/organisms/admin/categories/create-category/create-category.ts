@@ -70,7 +70,6 @@ export class CreateCategory {
       },
 
       error: (err) => {
-        console.log(err);
         Swal.fire('Ha habido un error', '', 'info');
       }
     });

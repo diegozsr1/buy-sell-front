@@ -29,8 +29,6 @@ export class ModeratorPanelComponentComponent {
 
     this.reportsService.getAllReports().subscribe({
       next: (reportes) => {
-        console.log('Reportes:', reportes);
-      
         const hoy = new Date().toISOString().split('T')[0];
       
         this.pendientes = reportes.filter((reporte: any) => {

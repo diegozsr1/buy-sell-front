@@ -21,11 +21,9 @@ export class ProductPublished {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('productID')!;
-    console.log(id);
 
     this.articlesService.getArticleById(Number(id)).subscribe({
       next: (data) => {
-        console.log(data);
         this.articulo = data;
         this.cd.detectChanges();
       },
