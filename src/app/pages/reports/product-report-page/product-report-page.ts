@@ -10,6 +10,7 @@ import { Toast } from "../../../components/atoms/toast/toast";
 import { HomeBar } from "../../../components/organisms/home-bar/home-bar";
 import { Sidebar } from "../../../components/organisms/sidebar/sidebar";
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-report-page',
@@ -81,10 +82,16 @@ export class ProductReportPage {
         }));
       }
 
-      this.toastVariant.set('success');
-      this.showToast.set(false);
-      setTimeout(() => this.showToast.set(true), 10)
-      setTimeout(() => this.router.navigate(['/home']), 3500);
+      Swal.fire({
+        icon: 'success',
+        title: 'Reporte enviado',
+        text: 'Su reporte ha sido enviado correctamente. Gracias por ayudarnos a mantener la comunidad segura.',
+        confirmButtonText: 'Volver al inicio',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/']);
+          }
+        });
 
     } catch (error) {
       this.toastVariant.set('error');
