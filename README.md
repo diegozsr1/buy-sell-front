@@ -1,59 +1,395 @@
-# Frontend
+# Buy&Sell Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+<p align="center">
+  <img src="https://github.com/diegozsr1/buy-sell-front/blob/main/public/logo-blue.png" alt="Buy&Sell Logo" width="180"/>
+</p>
 
-## Development server
+<p align="center">
 
-To start a local development server, run:
+A modern marketplace frontend built with Angular.
+
+Developed as part of the Buy&Sell Full Stack application.
+
+</p>
+
+<p align="center">
+
+[![Angular](https://img.shields.io/badge/Angular-20-DD0031?logo=angular)](https://angular.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap)](https://getbootstrap.com/)
+[![RxJS](https://img.shields.io/badge/RxJS-Reactive-B7178C?logo=reactivex)](https://rxjs.dev/)
+
+</p>
+
+---
+
+# Overview
+
+Buy&Sell Frontend is a Single Page Application (SPA) developed with Angular.
+
+Its objective is to provide users with an intuitive, responsive and scalable interface for buying and selling second-hand products.
+
+The application communicates with the REST API developed in Express and uses JWT authentication to protect private routes.
+
+---
+
+# Live Demo
+
+incoming
+
+---
+
+# Related Repositories
+
+## Project Documentation
+
+https://github.com/diegozsr1/buy-sell
+
+## Backend
+
+https://github.com/diegozsr1/buy-sell-back
+
+---
+
+# Main Features
+
+- User Authentication
+- Secure Login
+- JWT Session Management
+- Product Catalogue
+- Product Details
+- Dynamic Image Gallery
+- User Profiles
+- Favourite Products
+- Product Reports
+- User Reviews
+- Messaging Interface
+- Responsive Navigation
+- Admin Area
+- Moderator Area
+
+---
+
+# Tech Stack
+
+| Technology | Purpose |
+|------------|----------|
+| Angular | Frontend Framework |
+| TypeScript | Programming Language |
+| Signals | Reactive State |
+| Bootstrap | UI Components |
+| RxJS | Reactive Programming |
+| Angular Router | Navigation |
+| HttpClient | REST Communication |
+
+---
+
+# Architecture
+
+The frontend follows a modular architecture where each feature is isolated into reusable components and services.
+
+```mermaid
+graph TD
+
+App
+
+App --> Pages
+
+App --> Components
+
+App --> Services
+
+App --> Guards
+
+App --> Interceptors
+
+App --> Shared
+
+Pages --> Product
+
+Pages --> Login
+
+Pages --> Profile
+
+Pages --> Reports
+
+Pages --> Reviews
+
+Pages --> Chat
+```
+
+---
+
+# Routing
+
+Angular Router is responsible for navigating between application pages.
+
+The routing system separates:
+
+- Public Routes
+
+- Authenticated Routes
+
+- Administrator Routes
+
+- Moderator Routes
+
+This architecture allows easy scalability while keeping responsibilities separated.
+
+---
+
+# Authentication
+
+Authentication is based on JWT.
+
+Workflow:
+
+User Login
+
+↓
+
+Backend validates credentials
+
+↓
+
+JWT Token generated
+
+↓
+
+Token stored
+
+↓
+
+HTTP Interceptor adds Authorization Header
+
+↓
+
+Backend validates token
+
+↓
+
+Access granted
+
+---
+
+# Guards
+
+The application implements different Guards.
+
+## Authentication Guard
+
+Protects routes that require an authenticated user.
+
+---
+
+## Role Guard
+
+Restricts access depending on user roles.
+
+Example:
+
+- Administrator
+
+- Moderator
+
+- Standard User
+
+---
+
+# HTTP Interceptor
+
+All protected requests automatically include:
+
+Authorization: Bearer TOKEN
+
+This avoids duplicating authentication logic throughout the application.
+
+---
+
+# Components
+
+The interface was designed following reusable component principles.
+
+Some reusable components include:
+
+- Button
+
+- Badge
+
+- Product Card
+
+- Mobile Navigation
+
+- Modal
+
+- Forms
+
+These components are configurable through Inputs and Outputs.
+
+---
+
+# Angular Signals
+
+The project makes use of Angular Signals to simplify reactive state management.
+
+Examples include:
+
+- Selected product image
+
+- Badge state
+
+- Dynamic UI updates
+
+Signals reduce complexity while improving readability and performance.
+
+---
+
+# Responsive Design
+
+The application has been designed using a mobile-first approach.
+
+Responsive elements include:
+
+- Mobile Bottom Navigation
+
+- Responsive Product Cards
+
+- Adaptive Forms
+
+- Flexible Grid Layout
+
+---
+
+# Services
+
+The frontend communicates with the backend through dedicated Angular services.
+
+Examples:
+
+- AuthService
+
+- ProductService
+
+- UserService
+
+- ReportService
+
+- FavouriteService
+
+- ReviewService
+
+Each service encapsulates HTTP communication and business logic.
+
+---
+
+# Folder Structure
+
+```
+src/
+
+app/
+
+components/
+
+pages/
+
+guards/
+
+interceptors/
+
+interfaces/
+
+services/
+
+shared/
+
+assets/
+
+environments/
+```
+
+---
+
+# Installation
+
+Clone repository
+
+```bash
+git clone https://github.com/diegozsr1/buy-sell-front
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run development server
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Application available at
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+# Future Improvements
 
-## Building
+- Docker support
 
-To build the project run:
+- Unit Testing
 
-```bash
-ng build
-```
+- Internationalization (i18n)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- Dark Theme
 
-## Running unit tests
+- Push Notifications
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Real-time Messaging
 
-```bash
-ng test
-```
+- Lazy Loading optimization
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+# Documentation
 
-```bash
-ng e2e
-```
+For complete project documentation visit:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+📚 Main Documentation
 
-## Additional Resources
+https://github.com/diegozsr1/buy-sell
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+# Author
+
+Developed collaboratively as part of the UNIR Full Stack Developer Master's Degree.
+
+Frontend contributions by **Diego Zapata** include:
+
+- Routing Architecture
+
+- Mobile Navigation
+
+- Atomic Components
+
+- Product View
+
+- JWT Guards
+
+- HTTP Interceptor
+
+- Reports
+
+- Reviews
+
+- Messaging UI
+
+- Favourite Products
+
+- Responsive Design
