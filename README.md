@@ -35,7 +35,7 @@ The application communicates with the REST API developed in Express and uses JWT
 
 # Live Demo
 
-incoming
+buy-sell-front.vercel.app
 
 ---
 
